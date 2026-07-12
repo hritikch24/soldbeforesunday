@@ -1,15 +1,16 @@
-import { GROK_MODEL, SITE_NAME } from './config';
+import { AI_MODEL, SITE_NAME } from './config';
 
-// Scores an incoming lead with Grok (x.ai). Returns "8/10 — summary…" or null.
+// Scores an incoming lead with Groq (api.groq.com, OpenAI-compatible).
+// Returns "N/10 — summary…" or null. Skipped gracefully if GROQ_API_KEY unset.
 export async function scoreLead(data: Record<string, unknown>): Promise<string | null> {
-  const key = process.env.GROK_API_KEY;
+  const key = process.env.GROQ_API_KEY;
   if (!key) return null;
   try {
-    const r = await fetch('https://api.x.ai/v1/chat/completions', {
+    const r = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${key}` },
       body: JSON.stringify({
-        model: GROK_MODEL,
+        model: AI_MODEL,
         max_tokens: 120,
         messages: [
           {
