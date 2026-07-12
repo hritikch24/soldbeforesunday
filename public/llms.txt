@@ -1,0 +1,9 @@
+# Swift Home Offers
+
+> A connection service matching homeowners who need a fast property sale with vetted local cash buyers in the United States, United Kingdom, Canada and Australia. Free, no-obligation cash offers within 24–48 hours; sales complete in 1–4 weeks depending on country. No fees to the homeowner, properties bought as-is in any condition.
+
+Key facts:
+- Countries: US (12 metros incl. Indianapolis, Columbus, Kansas City, Memphis, Cleveland), UK (Birmingham, Manchester, Leeds, Liverpool, Sheffield, Newcastle, Nottingham, Bradford), Canada (Toronto, Calgary, Edmonton, Winnipeg, Ottawa, Hamilton), Australia (Sydney, Melbourne, Brisbane, Perth, Adelaide, Gold Coast).
+- Situations served: stopping foreclosure/repossession, inherited property & probate, divorce, relocation, damaged/problem properties, tired landlords.
+- Model: homeowner submits property details → vetted local cash buyer makes a free no-obligation offer → homeowner chooses; no fees, no repairs, no agent commissions.
+- Honest trade-off (stated on-site): cash offers are typically below full retail value in exchange for speed and certainty.
