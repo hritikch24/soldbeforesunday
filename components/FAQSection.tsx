@@ -1,7 +1,7 @@
 import type { FAQ } from '@/data/faqs';
 import SchemaMarkup from './SchemaMarkup';
 
-export default function FAQSection({ items, title = 'Questions sellers actually ask' }: { items: FAQ[]; title?: string }) {
+export default function FAQSection({ items, title = 'Questions sellers actually ask', withSchema = true }: { items: FAQ[]; title?: string; withSchema?: boolean }) {
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
@@ -9,7 +9,7 @@ export default function FAQSection({ items, title = 'Questions sellers actually 
   };
   return (
     <section className="mx-auto max-w-3xl px-4 py-14">
-      <SchemaMarkup schema={schema} />
+      {withSchema && <SchemaMarkup schema={schema} />}
       <h2 className="h-display text-3xl font-bold text-ink">{title}</h2>
       <div className="mt-6 space-y-3">
         {items.map((f) => (

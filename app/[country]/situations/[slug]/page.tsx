@@ -19,6 +19,7 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
   return {
     title: s.title(c),
     description: `${s.heading(c)} Free, no-obligation cash offers from vetted buyers — ${c.processTerm} in ${c.days}.`,
+    openGraph: { title: s.title(c), description: s.heading(c), url: `/${country}/situations/${slug}` },
     alternates: { canonical: `/${country}/situations/${slug}` },
   };
 }

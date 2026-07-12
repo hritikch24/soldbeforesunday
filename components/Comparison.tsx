@@ -1,13 +1,14 @@
-import type { Country } from '@/data/countries';
+import { an, type Country } from '@/data/countries';
 
 export default function Comparison({ c }: { c: Country }) {
+  const isUK = c.slug === 'uk';
   const rows = [
     ['Time to sell', `${c.days}`, '3–9 months, sometimes longer'],
     ['Fees & commissions', 'None', c.agentFee],
     ['Repairs & cleaning', 'Sell 100% as-is', 'Expected before listing'],
     ['Viewings / showings', 'None', 'Weeks of strangers in your home'],
-    ['Certainty', 'Cash — no chain, no financing', 'Sales fall through regularly'],
-    [`${c.processTerm[0].toUpperCase()}${c.processTerm.slice(1)} date`, 'You choose it', 'Whenever the chain allows'],
+    ['Certainty', isUK ? 'Cash — no chain, no financing' : 'Cash — no financing to fall through', 'Sales fall through regularly'],
+    [`${c.processTerm[0].toUpperCase()}${c.processTerm.slice(1)} date`, 'You choose it', isUK ? 'Whenever the chain allows' : "Whenever the buyer's lender allows"],
   ];
   return (
     <section className="mx-auto max-w-4xl px-4 py-16">
@@ -18,7 +19,7 @@ export default function Comparison({ c }: { c: Country }) {
             <tr className="bg-ink text-left text-white">
               <th className="p-4"></th>
               <th className="p-4 font-semibold">Cash sale via us</th>
-              <th className="p-4 font-semibold opacity-70">Listing with a {c.agentTerm}</th>
+              <th className="p-4 font-semibold opacity-70">Listing with {an(c.agentTerm)}</th>
             </tr>
           </thead>
           <tbody>

@@ -25,6 +25,7 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
   return {
     title: `Sell My House Fast ${ci.name} — Cash Offer in 24–48h`,
     description: `Sell your house fast in ${ci.name}, ${ci.region}. Free cash offer from vetted local buyers — any condition, no fees, ${co.processTerm} in ${co.days}.`,
+    openGraph: { title: `Sell My House Fast ${ci.name} — Cash Offer in 24–48h`, description: ci.blurb, url: `/${country}/${city}` },
     alternates: { canonical: `/${country}/${city}` },
   };
 }
@@ -74,7 +75,7 @@ export default async function CityPage({ params }: { params: Promise<{ country: 
               </Link>
             ))}
           </div>
-          <h2 className="mt-8 h-display text-xl font-bold text-ink">Other areas in the {co.name}</h2>
+          <h2 className="mt-8 h-display text-xl font-bold text-ink">Other areas in {co.nameWithThe}</h2>
           <div className="mt-4 flex flex-wrap gap-2">
             {citiesFor(co.slug).filter((x) => x.slug !== ci.slug).map((x) => (
               <Link key={x.slug} href={`/${co.slug}/${x.slug}`} className="rounded-full border border-[#ddd5c4] bg-white px-4 py-1.5 text-sm text-ink/70 hover:border-gold hover:text-ink">

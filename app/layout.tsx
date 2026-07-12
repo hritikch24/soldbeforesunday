@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
     template: `%s | ${SITE_NAME}`,
-    default: `${SITE_NAME} | Sell Your House Fast for Cash — US, UK, Canada & Australia`,
+    default: `Sell Your House Fast for Cash | ${SITE_NAME}`,
   },
   description: 'Get a free, no-obligation cash offer on your house in 24–48 hours. No fees, no repairs, no agents. Vetted local cash buyers in the US, UK, Canada and Australia.',
   verification: GSC_VERIFICATION ? { google: GSC_VERIFICATION } : undefined,

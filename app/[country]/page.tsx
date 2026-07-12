@@ -22,11 +22,12 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
   const c = getCountry(country);
   if (!c) return {};
   return {
-    title: `Sell Your House Fast in the ${c.name} — Cash Offer in 24–48h`,
+    title: `Sell Your House Fast in ${c.nameWithThe} — Cash Offer in 24–48h`,
     description: `${c.offerNote} Free no-obligation offers from vetted local cash buyers, ${c.processTerm} in ${c.days}.`,
+    openGraph: { title: `Sell Your House Fast in ${c.nameWithThe}`, description: c.offerNote, url: `/${c.slug}` },
     alternates: {
       canonical: `/${c.slug}`,
-      languages: Object.fromEntries(countries.map((x) => [x.locale, `${SITE_URL}/${x.slug}`])),
+      languages: Object.fromEntries([['x-default', SITE_URL], ...countries.map((x) => [x.locale, `${SITE_URL}/${x.slug}`])]),
     },
   };
 }
@@ -48,6 +49,7 @@ export default async function CountryPage({ params }: { params: Promise<{ countr
   return (
     <>
       <SchemaMarkup schema={schema} />
+      <Breadcrumbs crumbs={[{ href: '/', label: 'Home' }, { href: `/${c.slug}`, label: c.name }]} />
       <section className="relative">
         <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 lg:grid-cols-2 lg:items-center">
           <div>
@@ -67,7 +69,7 @@ export default async function CountryPage({ params }: { params: Promise<{ countr
       <Comparison c={c} />
       <section className="bg-paper py-14">
         <div className="mx-auto max-w-6xl px-4">
-          <h2 className="h-display text-2xl font-bold text-ink">We Buy Houses Across the {c.name}</h2>
+          <h2 className="h-display text-2xl font-bold text-ink">We Buy Houses Across {c.nameWithThe}</h2>
           <div className="mt-4 flex flex-wrap gap-2">
             {citiesFor(c.slug).map((city) => (
               <Link key={city.slug} href={`/${c.slug}/${city.slug}`} className="rounded-full border border-[#ddd5c4] bg-white px-4 py-1.5 text-sm text-ink/70 hover:border-gold hover:text-ink">
