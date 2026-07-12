@@ -14,7 +14,7 @@ export default function Header() {
     <header className="sticky top-0 z-50 border-b border-[#e9e3d6] bg-cream/95 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3.5">
         <Link href="/" className="h-display text-xl font-bold tracking-tight text-ink">
-          Swift<span className="text-gold">·</span>Home<span className="text-gold">·</span>Offers
+          Sold<span className="text-gold">·</span>Before<span className="text-gold">·</span>Sunday
         </Link>
         <nav className="hidden items-center gap-6 text-sm font-medium text-ink/80 md:flex">
           {nav.map((n) => (
