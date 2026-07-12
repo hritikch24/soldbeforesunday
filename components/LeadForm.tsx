@@ -2,8 +2,8 @@
 
 import { useState } from 'react';
 
-const inputCls = 'w-full rounded-lg border border-slate-300 p-3 text-slate-900';
-const btnCls = 'w-full rounded-lg bg-emerald-600 py-3.5 text-lg font-extrabold text-white hover:bg-emerald-500';
+const inputCls = 'w-full rounded-xl border border-[#ddd5c4] bg-white p-3.5 text-ink placeholder:text-ink/40 focus:border-gold focus:outline-none';
+const btnCls = 'w-full rounded-full bg-ink py-4 text-lg font-bold text-white transition hover:bg-ink-soft disabled:opacity-60';
 
 export default function LeadForm({ country, city, compact = false }: { country: string; city?: string; compact?: boolean }) {
   const [step, setStep] = useState(0);
@@ -32,10 +32,10 @@ export default function LeadForm({ country, city, compact = false }: { country: 
 
   if (done) {
     return (
-      <div className="rounded-2xl bg-white p-8 text-center shadow-xl">
-        <p className="text-3xl">✅</p>
-        <h3 className="mt-2 text-xl font-extrabold text-slate-900">Request received.</h3>
-        <p className="mt-2 text-slate-600">A vetted local cash buyer will contact you within 24 hours with your no-obligation offer.</p>
+      <div className="card-soft p-8 text-center">
+        <p className="text-3xl">✓</p>
+        <h3 className="h-display mt-2 text-2xl font-bold text-ink">Request received.</h3>
+        <p className="mt-2 text-ink/70">A vetted local cash buyer will contact you within 24 hours with your no-obligation offer.</p>
       </div>
     );
   }
@@ -79,23 +79,23 @@ export default function LeadForm({ country, city, compact = false }: { country: 
       <button className={btnCls} disabled={busy} onClick={() => d.name && d.phone && submit()}>
         {busy ? 'Sending…' : 'Get My Free Cash Offer ✓'}
       </button>
-      <p className="text-center text-xs text-slate-500">Free · No obligation · No fees · Your details go only to the vetted buyer for your area</p>
+      <p className="text-center text-xs text-ink/50">Free · No obligation · No fees. By submitting, you agree that vetted local buyer(s) in our network may contact you by phone, SMS or email about your property.</p>
     </div>,
   ];
 
   return (
-    <div className={`rounded-2xl bg-white p-6 shadow-xl ${compact ? '' : 'md:p-8'}`}>
+    <div className={`card-soft p-6 ${compact ? '' : 'md:p-8'}`}>
       <div className="mb-4 flex gap-1.5">
         {[0, 1, 2, 3].map((i) => (
-          <div key={i} className={`h-1.5 flex-1 rounded-full ${i <= step ? 'bg-emerald-500' : 'bg-slate-200'}`} />
+          <div key={i} className={`h-1 flex-1 rounded-full ${i <= step ? 'bg-gold' : 'bg-[#eee7d8]'}`} />
         ))}
       </div>
-      <h3 className="text-lg font-extrabold text-slate-900">
+      <h3 className="h-display text-xl font-bold text-ink">
         {['Where is the property?', 'About the property', 'Your situation', 'Where do we send the offer?'][step]}
       </h3>
       <div className="mt-4">{steps[step]}</div>
       {step > 0 && (
-        <button className="mt-3 text-sm text-slate-400 hover:text-slate-600" onClick={() => setStep(step - 1)}>← Back</button>
+        <button className="mt-3 text-sm text-ink/40 hover:text-ink/70" onClick={() => setStep(step - 1)}>← Back</button>
       )}
     </div>
   );

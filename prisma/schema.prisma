@@ -1,0 +1,33 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Lead {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  type      String   @default("form") // form | call_click | contact
+  country   String?
+  city      String?
+  name      String?
+  phone     String?
+  email     String?
+  address   String?
+  page      String?
+  details   String?  // full JSON payload
+  score     String?  // Grok AI score + summary
+  status    String   @default("new") // new | contacted | sold | junk
+}
+
+model Event {
+  id        String   @id
+  createdAt DateTime @default(now())
+  type      String   @default("pageview")
+  page      String?
+  ref       String?
+  ua        String?
+}

@@ -1,10 +1,15 @@
 import type { Metadata, Viewport } from 'next';
+import { Fraunces, Inter } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Analytics from '@/components/Analytics';
+import PageTracker from '@/components/PageTracker';
 import SchemaMarkup from '@/components/SchemaMarkup';
-import { SITE_NAME, SITE_URL } from '@/lib/config';
+import { SITE_NAME, SITE_URL, GSC_VERIFICATION } from '@/lib/config';
+
+const fraunces = Fraunces({ subsets: ['latin'], variable: '--font-fraunces', display: 'swap', weight: ['400', '600', '700'] });
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' });
 
 export const viewport: Viewport = { width: 'device-width', initialScale: 1 };
 
@@ -15,7 +20,7 @@ export const metadata: Metadata = {
     default: `${SITE_NAME} | Sell Your House Fast for Cash — US, UK, Canada & Australia`,
   },
   description: 'Get a free, no-obligation cash offer on your house in 24–48 hours. No fees, no repairs, no agents. Vetted local cash buyers in the US, UK, Canada and Australia.',
-  verification: process.env.NEXT_PUBLIC_GSC_VERIFICATION ? { google: process.env.NEXT_PUBLIC_GSC_VERIFICATION } : undefined,
+  verification: GSC_VERIFICATION ? { google: GSC_VERIFICATION } : undefined,
   openGraph: {
     type: 'website',
     url: SITE_URL,
@@ -37,15 +42,26 @@ const orgSchema = {
   areaServed: ['United States', 'United Kingdom', 'Canada', 'Australia'],
 };
 
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': `${SITE_URL}/#website`,
+  url: SITE_URL,
+  name: SITE_NAME,
+  publisher: { '@id': `${SITE_URL}/#org` },
+};
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body className="bg-slate-50 font-sans text-slate-800">
+    <html lang="en" className={`${fraunces.variable} ${inter.variable}`}>
+      <body className="bg-cream text-ink">
         <SchemaMarkup schema={orgSchema} />
+        <SchemaMarkup schema={websiteSchema} />
         <Header />
         <main>{children}</main>
         <Footer />
         <Analytics />
+        <PageTracker />
       </body>
     </html>
   );

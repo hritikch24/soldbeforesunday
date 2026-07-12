@@ -9,6 +9,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const entries: MetadataRoute.Sitemap = [
     { url: SITE_URL, lastModified: now, priority: 1 },
     { url: `${SITE_URL}/about`, lastModified: now, priority: 0.5 },
+    { url: `${SITE_URL}/faq`, lastModified: now, priority: 0.7 },
+    { url: `${SITE_URL}/how-it-works`, lastModified: now, priority: 0.7 },
+    { url: `${SITE_URL}/glossary`, lastModified: now, priority: 0.6 },
+    { url: `${SITE_URL}/privacy`, lastModified: now, priority: 0.2 },
+    { url: `${SITE_URL}/terms`, lastModified: now, priority: 0.2 },
   ];
   for (const c of countries) {
     entries.push({ url: `${SITE_URL}/${c.slug}`, lastModified: now, priority: 0.9 });

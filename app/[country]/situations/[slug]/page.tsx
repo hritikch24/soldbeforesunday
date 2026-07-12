@@ -34,8 +34,8 @@ export default async function SituationPage({ params }: { params: Promise<{ coun
       <Breadcrumbs crumbs={[{ href: '/', label: 'Home' }, { href: `/${c.slug}`, label: c.name }, { href: `/${c.slug}/situations/${s.slug}`, label: s.title(c) }]} />
       <section className="mx-auto grid max-w-6xl gap-10 px-4 pb-14 lg:grid-cols-2">
         <div>
-          <h1 className="text-3xl font-extrabold leading-tight text-slate-900 md:text-4xl">{s.heading(c)}</h1>
-          <div className="mt-5 space-y-4 text-lg text-slate-700">
+          <h1 className="h-display text-3xl font-bold leading-[1.1] text-ink md:text-4xl">{s.heading(c)}</h1>
+          <div className="mt-5 space-y-4 text-lg leading-relaxed text-ink/75">
             {s.body(c).map((p, i) => (<p key={i}>{p}</p>))}
           </div>
         </div>

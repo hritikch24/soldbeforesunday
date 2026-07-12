@@ -1,3 +1,32 @@
 @import "tailwindcss";
+
+@theme {
+  --color-ink: #10231b;
+  --color-ink-soft: #1d3a2d;
+  --color-cream: #faf7f1;
+  --color-paper: #ffffff;
+  --color-gold: #c79a3b;
+  --color-gold-soft: #f3e7cd;
+  --color-moss: #0e7c4f;
+  --font-display: var(--font-fraunces);
+  --font-body: var(--font-inter);
+}
+
 html { scroll-behavior: smooth; }
-body { -webkit-font-smoothing: antialiased; }
+body { -webkit-font-smoothing: antialiased; font-family: var(--font-body), ui-sans-serif, system-ui; }
+
+.h-display { font-family: var(--font-display), Georgia, serif; letter-spacing: -0.02em; }
+.accent-italic { font-style: italic; color: var(--color-gold); }
+
+.btn-ink {
+  display: inline-block; border-radius: 9999px; background: var(--color-ink); color: #fff;
+  font-weight: 700; padding: 0.9rem 2rem; transition: background .15s ease, transform .1s ease;
+}
+.btn-ink:hover { background: var(--color-ink-soft); transform: translateY(-1px); }
+
+.card-soft { background: var(--color-paper); border: 1px solid #e9e3d6; border-radius: 1.25rem; box-shadow: 0 1px 2px rgba(16,35,27,.05), 0 12px 32px -16px rgba(16,35,27,.12); }
+
+details.faq summary { list-style: none; cursor: pointer; }
+details.faq summary::-webkit-details-marker { display: none; }
+details.faq summary::after { content: "+"; float: right; font-weight: 700; color: var(--color-gold); font-size: 1.25rem; line-height: 1; }
+details.faq[open] summary::after { content: "–"; }

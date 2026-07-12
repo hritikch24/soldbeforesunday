@@ -20,3 +20,15 @@ Home (country gateway) · 4 country landing pages · 32 city pages · 24 situati
 - Below-market trade-off disclosed on About + FAQ — builds trust, filters tire-kickers, keeps UK (TPO/NAPB norms) and AU (ACL) compliance-friendly.
 - No fake testimonials or invented statistics.
 # swifthomeoffers
+
+## Lead engine (built-in — replaces LEAD_WEBHOOK_URL)
+Every lead → Postgres (Prisma) + Grok AI score + instant Telegram message + /admin dashboard.
+
+**Only 4 env vars (set in Vercel):**
+- `DATABASE_URL` — Postgres (Neon/Vercel Postgres free tier). After first deploy: `curl -X POST "https://YOURDOMAIN.com/api/db-run?key=ADMIN_KEY"` (creates tables; same pattern as sigma)
+- `GROK_API_KEY` — x.ai API key (lead scoring; skipped gracefully if unset)
+- `TELEGRAM_BOT_TOKEN` — from @BotFather
+- `TELEGRAM_CHAT_ID` — your chat id (message @userinfobot)
+
+**In-code config (lib/config.ts):** GA_ID, GSC_VERIFICATION, ADMIN_KEY (change it!), GROK_MODEL.
+**Admin dashboard:** `/admin?key=<ADMIN_KEY>` — statuses: new / contacted / sold / junk.
