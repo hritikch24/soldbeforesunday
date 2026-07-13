@@ -13,11 +13,9 @@ export function middleware(req: NextRequest) {
   if (req.cookies.get('geo_done')) return NextResponse.next();
 
   const cc = (req.headers.get('x-vercel-ip-country') ?? '').toUpperCase();
-  const slug = COUNTRY_MAP[cc];
+  const slug = COUNTRY_MAP[cc] ?? 'us'; // fallback: unmapped countries go to /us
 
-  const res = slug
-    ? NextResponse.redirect(new URL(`/${slug}`, req.url), 307)
-    : NextResponse.next();
+  const res = NextResponse.redirect(new URL(`/${slug}`, req.url), 307);
   res.cookies.set('geo_done', '1', { maxAge: 60 * 60 * 24 * 30, path: '/' });
   return res;
 }
