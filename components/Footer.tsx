@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { SITE_NAME } from '@/lib/config';
+import { SITE_NAME, CONTACT_EMAIL, PHONE, PHONE_DISPLAY, WHATSAPP } from '@/lib/config';
 import { countries } from '@/data/countries';
 import { citiesFor } from '@/data/cities';
 
@@ -10,11 +10,17 @@ export default function Footer() {
         <div>
           <p className="h-display text-xl font-bold text-white">{SITE_NAME}</p>
           <p className="mt-3 text-sm leading-relaxed">We connect homeowners who need a fast sale with vetted local cash buyers. Free offers, no fees, sell as-is.</p>
+          <div className="mt-4 space-y-1 text-sm">
+            <p><a href={`mailto:${CONTACT_EMAIL}`} className="hover:text-gold">✉ {CONTACT_EMAIL}</a></p>
+            {PHONE && <p><a href={`tel:${PHONE}`} className="hover:text-gold">📞 {PHONE_DISPLAY}</a></p>}
+            {WHATSAPP && <p><a href={`https://wa.me/${WHATSAPP}`} className="hover:text-gold">💬 WhatsApp us</a></p>}
+          </div>
           <ul className="mt-4 space-y-1 text-sm">
             <li><Link href="/how-it-works" className="hover:text-gold">How It Works</Link></li>
             <li><Link href="/faq" className="hover:text-gold">FAQ</Link></li>
             <li><Link href="/glossary" className="hover:text-gold">Property Glossary</Link></li>
             <li><Link href="/about" className="hover:text-gold">About Us</Link></li>
+            <li><Link href="/contact" className="hover:text-gold">Contact</Link></li>
             <li><Link href="/privacy" className="hover:text-gold">Privacy Policy</Link></li>
             <li><Link href="/terms" className="hover:text-gold">Terms of Use</Link></li>
           </ul>

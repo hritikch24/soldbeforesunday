@@ -5,8 +5,9 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Analytics from '@/components/Analytics';
 import PageTracker from '@/components/PageTracker';
+import FloatingWhatsApp from '@/components/FloatingWhatsApp';
 import SchemaMarkup from '@/components/SchemaMarkup';
-import { SITE_NAME, SITE_URL, GSC_VERIFICATION } from '@/lib/config';
+import { SITE_NAME, SITE_URL, GSC_VERIFICATION, CONTACT_EMAIL, PHONE } from '@/lib/config';
 
 const fraunces = Fraunces({ subsets: ['latin'], variable: '--font-fraunces', display: 'swap', weight: ['400', '600', '700'] });
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' });
@@ -40,6 +41,12 @@ const orgSchema = {
   url: SITE_URL,
   description: 'A connection service matching homeowners who need a fast sale with vetted local cash property buyers in the US, UK, Canada and Australia.',
   areaServed: ['United States', 'United Kingdom', 'Canada', 'Australia'],
+  contactPoint: {
+    '@type': 'ContactPoint',
+    contactType: 'customer support',
+    email: CONTACT_EMAIL,
+    ...(PHONE ? { telephone: PHONE } : {}),
+  },
 };
 
 const websiteSchema = {
@@ -60,6 +67,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Header />
         <main>{children}</main>
         <Footer />
+        <FloatingWhatsApp />
         <Analytics />
         <PageTracker />
       </body>

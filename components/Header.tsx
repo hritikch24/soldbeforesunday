@@ -7,6 +7,7 @@ const nav = [
   { href: '/faq', label: 'FAQ' },
   { href: '/glossary', label: 'Glossary' },
   { href: '/about', label: 'About' },
+  { href: '/contact', label: 'Contact' },
 ];
 
 export default function Header() {
