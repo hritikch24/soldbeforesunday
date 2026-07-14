@@ -3,6 +3,7 @@
 import Script from 'next/script';
 import { useEffect } from 'react';
 import { GA_ID } from '@/lib/config';
+import { trackEvent } from './PageTracker';
 
 export default function Analytics() {
   useEffect(() => {
@@ -11,9 +12,7 @@ export default function Analytics() {
       if (!a) return;
       const w = window as unknown as { gtag?: (...args: unknown[]) => void };
       if (typeof w.gtag === 'function') w.gtag('event', 'call_click', { page_path: window.location.pathname, link_url: a.href });
-      try {
-        navigator.sendBeacon('/api/track', JSON.stringify({ event: 'call_click', href: a.href, page: window.location.pathname, ts: new Date().toISOString() }));
-      } catch { /* no-op */ }
+      trackEvent('call_click', { action: 'call_click', phone: a.href.replace('tel:', '') });
     };
     document.addEventListener('click', handler);
     return () => document.removeEventListener('click', handler);

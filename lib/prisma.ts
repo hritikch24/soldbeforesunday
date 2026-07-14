@@ -23,12 +23,23 @@ export interface EventRecord {
   page: string | null;
   ref: string | null;
   ua: string | null;
+  session: string | null;
+  ip: string | null;
+  country: string | null;
+  device: string | null;
+  browser: string | null;
+  utmSource: string | null;
+  utmMedium: string | null;
+  utmCampaign: string | null;
+  action: string | null;
+  phone: string | null;
 }
 
 interface LeadDelegate {
   create(args: { data: Partial<Omit<LeadRecord, 'id' | 'createdAt'>> }): Promise<LeadRecord>;
-  findMany(args?: { orderBy?: { createdAt: 'desc' | 'asc' }; take?: number }): Promise<LeadRecord[]>;
+  findMany(args?: { where?: Record<string, unknown>; orderBy?: { createdAt: 'desc' | 'asc' }; take?: number }): Promise<LeadRecord[]>;
   update(args: { where: { id: string }; data: { status: string } }): Promise<LeadRecord>;
+  count(args?: { where?: Record<string, unknown> }): Promise<number>;
 }
 
 interface EventDelegate {
@@ -37,7 +48,7 @@ interface EventDelegate {
 
 export interface RawCapable {
   $executeRawUnsafe(sql: string): Promise<number>;
-  $queryRawUnsafe<T = unknown>(sql: string): Promise<T>;
+  $queryRawUnsafe<T = unknown>(sql: string, ...values: unknown[]): Promise<T>;
 }
 
 const globalForPrisma = globalThis as unknown as { prismaClient?: PrismaClient };

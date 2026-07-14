@@ -24,10 +24,20 @@ model Lead {
 }
 
 model Event {
-  id        String   @id
-  createdAt DateTime @default(now())
-  type      String   @default("pageview")
-  page      String?
-  ref       String?
-  ua        String?
+  id          String   @id
+  createdAt   DateTime @default(now())
+  type        String   @default("pageview")
+  page        String?
+  ref         String?
+  ua          String?
+  session     String?
+  ip          String?
+  country     String?
+  device      String?
+  browser     String?
+  utmSource   String?
+  utmMedium   String?
+  utmCampaign String?
+  action      String?
+  phone       String?
 }
