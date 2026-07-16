@@ -19,6 +19,7 @@ export default function Footer() {
             <li><Link href="/how-it-works" className="hover:text-gold">How It Works</Link></li>
             <li><Link href="/faq" className="hover:text-gold">FAQ</Link></li>
             <li><Link href="/glossary" className="hover:text-gold">Property Glossary</Link></li>
+            <li><Link href="/guides" className="hover:text-gold">Seller Guides</Link></li>
             <li><Link href="/about" className="hover:text-gold">About Us</Link></li>
             <li><Link href="/contact" className="hover:text-gold">Contact</Link></li>
             <li><Link href="/privacy" className="hover:text-gold">Privacy Policy</Link></li>

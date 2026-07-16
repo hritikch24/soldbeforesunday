@@ -63,6 +63,17 @@ export default async function CityPage({ params }: { params: Promise<{ country: 
           <LeadForm country={co.slug} city={ci.slug} />
         </div>
       </section>
+      <section className="mx-auto max-w-6xl px-4 pb-4">
+        <h2 className="h-display text-xl font-bold text-ink">
+          {co.slug === 'au' ? 'Suburbs' : co.slug === 'uk' ? 'Areas' : 'Neighborhoods'} we cover in {ci.name}
+        </h2>
+        <div className="mt-3 flex flex-wrap gap-2">
+          {ci.areas.map((a) => (
+            <span key={a} className="rounded-full border border-[#ddd5c4] bg-white px-4 py-1.5 text-sm text-ink/70">{a}</span>
+          ))}
+          <span className="rounded-full bg-gold-soft px-4 py-1.5 text-sm font-medium text-ink">…and everywhere in between</span>
+        </div>
+      </section>
       <HowItWorks processTerm={co.processTerm} days={co.days} />
       <Comparison c={co} />
       <section className="bg-paper py-12">

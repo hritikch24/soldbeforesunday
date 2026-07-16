@@ -30,3 +30,7 @@ details.faq summary { list-style: none; cursor: pointer; }
 details.faq summary::-webkit-details-marker { display: none; }
 details.faq summary::after { content: "+"; float: right; font-weight: 700; color: var(--color-gold); font-size: 1.25rem; line-height: 1; }
 details.faq[open] summary::after { content: "–"; }
+
+:focus-visible { outline: 2px solid var(--color-gold); outline-offset: 2px; border-radius: 4px; }
+.skip-link { position: absolute; left: -9999px; top: 0; z-index: 100; background: var(--color-ink); color: #fff; padding: .6rem 1rem; border-radius: 0 0 .5rem 0; }
+.skip-link:focus { left: 0; }

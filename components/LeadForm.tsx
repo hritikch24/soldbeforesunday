@@ -42,8 +42,8 @@ export default function LeadForm({ country, city, compact = false }: { country: 
 
   const steps = [
     <div key="0" className="space-y-3">
-      <input required placeholder="Property address" className={inputCls} value={d.address ?? ''} onChange={set('address')} />
-      <input required placeholder={country === 'uk' ? 'Postcode' : country === 'ca' ? 'Postal code' : country === 'au' ? 'Suburb & postcode' : 'ZIP code'} className={inputCls} value={d.postcode ?? ''} onChange={set('postcode')} />
+      <input required autoComplete="street-address" placeholder="Property address" className={inputCls} value={d.address ?? ''} onChange={set('address')} />
+      <input required autoComplete="postal-code" placeholder={country === 'uk' ? 'Postcode' : country === 'ca' ? 'Postal code' : country === 'au' ? 'Suburb & postcode' : 'ZIP code'} className={inputCls} value={d.postcode ?? ''} onChange={set('postcode')} />
       <button className={btnCls} onClick={() => d.address && d.postcode && setStep(1)}>Get My Cash Offer →</button>
     </div>,
     <div key="1" className="space-y-3">
@@ -73,9 +73,9 @@ export default function LeadForm({ country, city, compact = false }: { country: 
       <button className={btnCls} onClick={() => d.reason && d.timeline && setStep(3)}>Next →</button>
     </div>,
     <div key="3" className="space-y-3">
-      <input required placeholder="Your name" className={inputCls} value={d.name ?? ''} onChange={set('name')} />
-      <input required type="tel" placeholder="Phone number" className={inputCls} value={d.phone ?? ''} onChange={set('phone')} />
-      <input type="email" placeholder="Email (optional)" className={inputCls} value={d.email ?? ''} onChange={set('email')} />
+      <input required autoComplete="name" placeholder="Your name" className={inputCls} value={d.name ?? ''} onChange={set('name')} />
+      <input required type="tel" autoComplete="tel" inputMode="tel" placeholder="Phone number" className={inputCls} value={d.phone ?? ''} onChange={set('phone')} />
+      <input type="email" autoComplete="email" inputMode="email" placeholder="Email (optional)" className={inputCls} value={d.email ?? ''} onChange={set('email')} />
       <button className={btnCls} disabled={busy} onClick={() => d.name && d.phone && submit()}>
         {busy ? 'Sending…' : 'Get My Free Cash Offer ✓'}
       </button>
@@ -84,8 +84,9 @@ export default function LeadForm({ country, city, compact = false }: { country: 
   ];
 
   return (
-    <div className={`card-soft p-6 ${compact ? '' : 'md:p-8'}`}>
-      <div className="mb-4 flex gap-1.5">
+    <div id="offer" className={`card-soft scroll-mt-28 p-6 ${compact ? '' : 'md:p-8'}`}>
+      <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-ink/40">Step {step + 1} of 4 · ≈2 minutes · Free &amp; no obligation</p>
+      <div className="mb-4 flex gap-1.5" role="progressbar" aria-valuemin={1} aria-valuemax={4} aria-valuenow={step + 1}>
         {[0, 1, 2, 3].map((i) => (
           <div key={i} className={`h-1 flex-1 rounded-full ${i <= step ? 'bg-gold' : 'bg-[#eee7d8]'}`} />
         ))}

@@ -13,6 +13,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE_URL}/faq`, lastModified: now, priority: 0.7 },
     { url: `${SITE_URL}/how-it-works`, lastModified: now, priority: 0.7 },
     { url: `${SITE_URL}/glossary`, lastModified: now, priority: 0.6 },
+    { url: `${SITE_URL}/guides`, lastModified: now, priority: 0.7 },
+    { url: `${SITE_URL}/guides/how-fast-cash-house-sales-work`, lastModified: now, priority: 0.6 },
+    { url: `${SITE_URL}/guides/cash-offer-vs-listing-real-math`, lastModified: now, priority: 0.6 },
+    { url: `${SITE_URL}/guides/avoid-quick-sale-scams`, lastModified: now, priority: 0.6 },
     { url: `${SITE_URL}/privacy`, lastModified: now, priority: 0.2 },
     { url: `${SITE_URL}/terms`, lastModified: now, priority: 0.2 },
   ];

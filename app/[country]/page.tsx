@@ -8,6 +8,7 @@ import { faqsFor } from '@/data/faqs';
 import LeadForm from '@/components/LeadForm';
 import HowItWorks from '@/components/HowItWorks';
 import Comparison from '@/components/Comparison';
+import VettingStandards from '@/components/VettingStandards';
 import FAQSection from '@/components/FAQSection';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import SchemaMarkup from '@/components/SchemaMarkup';
@@ -66,6 +67,7 @@ export default async function CountryPage({ params }: { params: Promise<{ countr
         </div>
       </section>
       <HowItWorks processTerm={c.processTerm} days={c.days} />
+      <VettingStandards />
       <Comparison c={c} />
       <section className="bg-paper py-14">
         <div className="mx-auto max-w-6xl px-4">

@@ -12,5 +12,6 @@ Key facts:
 - [How it works](/how-it-works): the 5-step process from form to funds, with honest timelines (HowTo structured data).
 - [FAQ](/faq): full Q&A per country, including below-market trade-off disclosure, scam protection checks, tenants, probate and mortgage arrears.
 - [Glossary](/glossary): plain-English definitions of foreclosure, repossession, power of sale, settlement, completion, chain-free, proof of funds, probate, mortgagee sale and more (DefinedTermSet structured data).
+- [Seller guides](/guides): how cash sales work, cash-offer-vs-listing net-proceeds math, and a scam-avoidance guide (five scams, three checks).
 - [About](/about) · [Contact](/contact) · [Privacy](/privacy) · [Terms](/terms)
 - Support: support@soldbeforesunday.com

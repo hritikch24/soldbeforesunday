@@ -6,6 +6,7 @@ import Footer from '@/components/Footer';
 import Analytics from '@/components/Analytics';
 import PageTracker from '@/components/PageTracker';
 import FloatingWhatsApp from '@/components/FloatingWhatsApp';
+import StickyCTA from '@/components/StickyCTA';
 import SchemaMarkup from '@/components/SchemaMarkup';
 import { SITE_NAME, SITE_URL, GSC_VERIFICATION, CONTACT_EMAIL, PHONE } from '@/lib/config';
 
@@ -61,12 +62,14 @@ const websiteSchema = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${fraunces.variable} ${inter.variable}`}>
-      <body className="bg-cream text-ink">
+      <body className="bg-cream pb-16 text-ink md:pb-0">
         <SchemaMarkup schema={orgSchema} />
         <SchemaMarkup schema={websiteSchema} />
+        <a href="#main" className="skip-link">Skip to content</a>
         <Header />
-        <main>{children}</main>
+        <main id="main">{children}</main>
         <Footer />
+        <StickyCTA />
         <FloatingWhatsApp />
         <Analytics />
         <PageTracker />
