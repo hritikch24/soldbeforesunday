@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { GOOGLE_ADS_ID, ADS_LEAD_LABEL } from '@/lib/config';
 
 const inputCls = 'w-full rounded-xl border border-[#ddd5c4] bg-white p-3.5 text-ink placeholder:text-ink/40 focus:border-gold focus:outline-none';
 const btnCls = 'w-full rounded-full bg-ink py-4 text-lg font-bold text-white transition hover:bg-ink-soft disabled:opacity-60';
@@ -23,7 +24,12 @@ export default function LeadForm({ country, city, compact = false }: { country: 
         body: JSON.stringify({ ...d, ts: new Date().toISOString(), page: window.location.pathname }),
       });
       const w = window as unknown as { gtag?: (...a: unknown[]) => void };
-      if (typeof w.gtag === 'function') w.gtag('event', 'lead_submit', { country, city: city ?? '' });
+      if (typeof w.gtag === 'function') {
+        w.gtag('event', 'lead_submit', { country, city: city ?? '' });
+        if (GOOGLE_ADS_ID && ADS_LEAD_LABEL) {
+          w.gtag('event', 'conversion', { send_to: `${GOOGLE_ADS_ID}/${ADS_LEAD_LABEL}` });
+        }
+      }
       setDone(true);
     } finally {
       setBusy(false);
