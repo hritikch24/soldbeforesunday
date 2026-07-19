@@ -8,6 +8,10 @@ import { faqsFor } from '@/data/faqs';
 import LeadForm from '@/components/LeadForm';
 import HowItWorks from '@/components/HowItWorks';
 import Comparison from '@/components/Comparison';
+import TrustSignals from '@/components/TrustSignals';
+import FoundingOffer from '@/components/FoundingOffer';
+import BuyerNetwork from '@/components/BuyerNetwork';
+import Testimonials from '@/components/Testimonials';
 import FAQSection from '@/components/FAQSection';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import SchemaMarkup from '@/components/SchemaMarkup';
@@ -75,7 +79,11 @@ export default async function CityPage({ params }: { params: Promise<{ country: 
         </div>
       </section>
       <HowItWorks processTerm={co.processTerm} days={co.days} />
+      <BuyerNetwork country={co.slug} cityName={ci.name} />
+      <Testimonials country={co.slug} />
       <Comparison c={co} />
+      <TrustSignals />
+      <FoundingOffer city={ci.name} />
       <section className="bg-paper py-12">
         <div className="mx-auto max-w-6xl px-4">
           <h2 className="h-display text-xl font-bold text-ink">Common situations we help with in {ci.name}</h2>

@@ -8,7 +8,10 @@ import { faqsFor } from '@/data/faqs';
 import LeadForm from '@/components/LeadForm';
 import HowItWorks from '@/components/HowItWorks';
 import Comparison from '@/components/Comparison';
-import VettingStandards from '@/components/VettingStandards';
+import TrustSignals from '@/components/TrustSignals';
+import FoundingOffer from '@/components/FoundingOffer';
+import BuyerNetwork from '@/components/BuyerNetwork';
+import Testimonials from '@/components/Testimonials';
 import FAQSection from '@/components/FAQSection';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import SchemaMarkup from '@/components/SchemaMarkup';
@@ -67,8 +70,11 @@ export default async function CountryPage({ params }: { params: Promise<{ countr
         </div>
       </section>
       <HowItWorks processTerm={c.processTerm} days={c.days} />
-      <VettingStandards />
+      <BuyerNetwork country={c.slug} />
+      <Testimonials country={c.slug} />
       <Comparison c={c} />
+      <TrustSignals />
+      <FoundingOffer />
       <section className="bg-paper py-14">
         <div className="mx-auto max-w-6xl px-4">
           <h2 className="h-display text-2xl font-bold text-ink">We Buy Houses Across {c.nameWithThe}</h2>
