@@ -12,6 +12,7 @@ import FoundingOffer from '@/components/FoundingOffer';
 import BuyerNetwork from '@/components/BuyerNetwork';
 import CountryHero from '@/components/CountryHero';
 import ActivityTicker from '@/components/ActivityTicker';
+import { situationIcon } from '@/components/Icons';
 import Testimonials from '@/components/Testimonials';
 import FAQSection from '@/components/FAQSection';
 import Breadcrumbs from '@/components/Breadcrumbs';
@@ -75,11 +76,15 @@ export default async function CountryPage({ params }: { params: Promise<{ countr
           </div>
           <h2 className="mt-10 h-display text-2xl font-bold text-ink">Whatever the Situation</h2>
           <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {situations.map((s) => (
-              <Link key={s.slug} href={`/${c.slug}/situations/${s.slug}`} className="card-soft p-4 transition hover:-translate-y-0.5">
-                <span className="h-display font-semibold text-ink">{s.title(c)}</span>
-              </Link>
-            ))}
+            {situations.map((s) => {
+              const Ico = situationIcon[s.slug];
+              return (
+                <Link key={s.slug} href={`/${c.slug}/situations/${s.slug}`} className="card-soft flex items-start gap-3 p-4 transition hover:-translate-y-0.5">
+                  {Ico && <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-gold-soft"><Ico className="h-5 w-5 text-ink" /></span>}
+                  <span className="h-display font-semibold text-ink">{s.title(c)}</span>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>
