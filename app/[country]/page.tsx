@@ -5,12 +5,13 @@ import { countries, getCountry } from '@/data/countries';
 import { citiesFor } from '@/data/cities';
 import { situations } from '@/data/situations';
 import { faqsFor } from '@/data/faqs';
-import LeadForm from '@/components/LeadForm';
 import HowItWorks from '@/components/HowItWorks';
 import Comparison from '@/components/Comparison';
 import TrustSignals from '@/components/TrustSignals';
 import FoundingOffer from '@/components/FoundingOffer';
 import BuyerNetwork from '@/components/BuyerNetwork';
+import CountryHero from '@/components/CountryHero';
+import ActivityTicker from '@/components/ActivityTicker';
 import Testimonials from '@/components/Testimonials';
 import FAQSection from '@/components/FAQSection';
 import Breadcrumbs from '@/components/Breadcrumbs';
@@ -54,21 +55,8 @@ export default async function CountryPage({ params }: { params: Promise<{ countr
     <>
       <SchemaMarkup schema={schema} />
       <Breadcrumbs crumbs={[{ href: '/', label: 'Home' }, { href: `/${c.slug}`, label: c.name }]} />
-      <section className="relative">
-        <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 lg:grid-cols-2 lg:items-center">
-          <div>
-            <p className="text-sm font-bold uppercase tracking-[0.25em] text-moss">{c.flag} {c.name}</p>
-            <h1 className="h-display mt-3 text-4xl font-bold leading-[1.08] text-ink md:text-5xl">Sell Your House Fast — {c.processTerm[0].toUpperCase() + c.processTerm.slice(1)} in {c.days}.</h1>
-            <p className="mt-4 text-lg leading-relaxed text-ink/70">{c.offerNote}</p>
-            <ul className="mt-6 space-y-2 font-medium text-ink/80">
-              <li>✓ Free, no-obligation cash offer within 24–48 hours</li>
-              <li>✓ Any condition, any situation — including {c.distressTerm}</li>
-              <li>✓ No {c.agentTerm} fees, no repairs, no viewings</li>
-            </ul>
-          </div>
-          <LeadForm country={c.slug} />
-        </div>
-      </section>
+      <CountryHero c={c} />
+      <ActivityTicker />
       <HowItWorks processTerm={c.processTerm} days={c.days} />
       <BuyerNetwork country={c.slug} />
       <Testimonials country={c.slug} />

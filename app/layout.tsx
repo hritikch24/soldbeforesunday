@@ -7,6 +7,7 @@ import Analytics from '@/components/Analytics';
 import PageTracker from '@/components/PageTracker';
 import FloatingWhatsApp from '@/components/FloatingWhatsApp';
 import StickyCTA from '@/components/StickyCTA';
+import LeadPopup from '@/components/LeadPopup';
 import SchemaMarkup from '@/components/SchemaMarkup';
 import { SITE_NAME, SITE_URL, GSC_VERIFICATION, CONTACT_EMAIL, PHONE } from '@/lib/config';
 
@@ -70,6 +71,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main id="main">{children}</main>
         <Footer />
         <StickyCTA />
+        <LeadPopup />
         <FloatingWhatsApp />
         <Analytics />
         <PageTracker />
