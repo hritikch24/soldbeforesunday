@@ -131,3 +131,13 @@ header.sticky { background: rgba(250,247,241,.72); backdrop-filter: saturate(1.4
   .aurora::before, .aurora::after { animation: none; }
   .r-hidden { opacity:1 !important; transform:none !important; }
 }
+
+/* ── Real gradient hero images now present — promote them ── */
+.hero-photo { opacity: .62; filter: none; z-index: -1; }
+.hero-svg { display: none; }          /* image contains its own skyline now */
+.aurora { opacity: .38; }             /* keep faint drift behind the image + home hero */
+/* legibility scrim so ink text stays crisp over the gradient */
+section.relative.overflow-hidden::after {
+  content:""; position:absolute; inset:0; z-index:-1; pointer-events:none;
+  background: linear-gradient(105deg, rgba(250,247,241,.62) 0%, rgba(250,247,241,.28) 42%, rgba(250,247,241,0) 70%);
+}
