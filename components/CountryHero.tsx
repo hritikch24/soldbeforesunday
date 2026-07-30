@@ -7,6 +7,7 @@ import type { Country } from '@/data/countries';
 export default function CountryHero({ c }: { c: Country }) {
   return (
     <section className="relative overflow-hidden">
+      <div className="aurora" aria-hidden />
       {/* Ships with an original SVG backdrop; drop /images/hero-<slug>.jpg (licensed) to override per country. */}
       <div className="hero-photo" style={{ backgroundImage: `image-set(url(/images/hero-${c.slug}.jpg) 1x)`, backgroundColor: "transparent" }} aria-hidden />
       <div className="hero-svg" aria-hidden />
@@ -15,7 +16,7 @@ export default function CountryHero({ c }: { c: Country }) {
           <p className="flex items-center gap-2 text-sm font-bold uppercase tracking-[0.25em] text-moss">
             <span className="live-dot" /> {c.flag} {c.name} · buyers active now
           </p>
-          <h1 className="h-display mt-3 text-4xl font-bold leading-[1.08] text-ink md:text-5xl">
+          <h1 className="h-display fluid-hero mt-3 font-bold text-ink">
             Sell your house fast — <span className="accent-italic">{c.processTerm[0].toUpperCase() + c.processTerm.slice(1)} in {c.days}.</span>
           </h1>
           <p className="mt-4 text-lg leading-relaxed text-ink/70">{c.offerNote}</p>

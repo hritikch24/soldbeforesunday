@@ -16,9 +16,10 @@ export default function Home() {
   return (
     <>
       <section className="relative overflow-hidden">
+        <div className="aurora" aria-hidden />
         <div className="mx-auto max-w-4xl px-4 py-20 text-center md:py-28">
           <p className="text-sm font-bold uppercase tracking-[0.25em] text-moss">Vetted cash buyers · Four countries</p>
-          <h1 className="h-display mt-4 text-5xl font-bold leading-[1.05] text-ink md:text-6xl">
+          <h1 className="h-display fluid-hero mt-4 font-bold text-ink">
             Sell the house. <span className="accent-italic">Skip the circus.</span>
           </h1>
           <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-ink/70">
