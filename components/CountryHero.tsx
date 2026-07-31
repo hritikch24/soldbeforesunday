@@ -6,7 +6,7 @@ import type { Country } from '@/data/countries';
 // If the file is missing the browser simply shows the ink background — no break.
 export default function CountryHero({ c }: { c: Country }) {
   return (
-    <section className="relative overflow-hidden">
+    <section className="hero-shell relative overflow-hidden">
       <div className="aurora" aria-hidden />
       {/* Ships with an original SVG backdrop; drop /images/hero-<slug>.jpg (licensed) to override per country. */}
       <div className="hero-photo" style={{ backgroundImage: `image-set(url(/images/hero-${c.slug}.jpg) 1x)`, backgroundColor: "transparent" }} aria-hidden />

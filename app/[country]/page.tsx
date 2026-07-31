@@ -10,6 +10,7 @@ import Comparison from '@/components/Comparison';
 import TrustSignals from '@/components/TrustSignals';
 import FoundingOffer from '@/components/FoundingOffer';
 import BuyerNetwork from '@/components/BuyerNetwork';
+import IllustratedBand from '@/components/IllustratedBand';
 import CountryHero from '@/components/CountryHero';
 import ActivityTicker from '@/components/ActivityTicker';
 import { situationIcon } from '@/components/Icons';
@@ -58,6 +59,7 @@ export default async function CountryPage({ params }: { params: Promise<{ countr
       <Breadcrumbs crumbs={[{ href: '/', label: 'Home' }, { href: `/${c.slug}`, label: c.name }]} />
       <CountryHero c={c} />
       <ActivityTicker />
+      <IllustratedBand country={c.slug} />
       <HowItWorks processTerm={c.processTerm} days={c.days} />
       <BuyerNetwork country={c.slug} />
       <Testimonials country={c.slug} />

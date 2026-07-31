@@ -11,6 +11,7 @@ import Comparison from '@/components/Comparison';
 import TrustSignals from '@/components/TrustSignals';
 import FoundingOffer from '@/components/FoundingOffer';
 import BuyerNetwork from '@/components/BuyerNetwork';
+import IllustratedBand from '@/components/IllustratedBand';
 import Testimonials from '@/components/Testimonials';
 import FAQSection from '@/components/FAQSection';
 import Breadcrumbs from '@/components/Breadcrumbs';
@@ -53,10 +54,11 @@ export default async function CityPage({ params }: { params: Promise<{ country: 
     <>
       <SchemaMarkup schema={schema} />
       <Breadcrumbs crumbs={[{ href: '/', label: 'Home' }, { href: `/${co.slug}`, label: co.name }, { href: `/${co.slug}/${ci.slug}`, label: ci.name }]} />
-      <section className="relative">
+      <section className="hero-shell relative overflow-hidden">
+        <div className="hero-photo" style={{ backgroundImage: `image-set(url(/images/hero-${co.slug}.jpg) 1x)` }} aria-hidden />
         <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 lg:grid-cols-2 lg:items-center">
           <div>
-            <h1 className="h-display text-4xl font-bold leading-[1.08] text-ink md:text-5xl">Sell Your House Fast in {ci.name}</h1>
+            <h1 className="h-display fluid-hero font-bold text-ink">Sell Your House Fast in {ci.name}</h1>
             <p className="mt-4 text-lg leading-relaxed text-ink/70">{ci.blurb}</p>
             <ul className="mt-6 space-y-2 font-medium text-ink/80">
               <li>✓ Cash offer within 24–48 hours — free, no obligation</li>
@@ -78,6 +80,7 @@ export default async function CityPage({ params }: { params: Promise<{ country: 
           <span className="rounded-full bg-gold-soft px-4 py-1.5 text-sm font-medium text-ink">…and everywhere in between</span>
         </div>
       </section>
+      <IllustratedBand country={co.slug} cityName={ci.name} />
       <HowItWorks processTerm={co.processTerm} days={co.days} />
       <BuyerNetwork country={co.slug} cityName={ci.name} />
       <Testimonials country={co.slug} />

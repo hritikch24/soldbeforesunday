@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
-      <section className="relative overflow-hidden">
+      <section className="hero-shell relative overflow-hidden">
         <div className="aurora" aria-hidden />
         <div className="mx-auto max-w-4xl px-4 py-20 text-center md:py-28">
           <p className="text-sm font-bold uppercase tracking-[0.25em] text-moss">Vetted cash buyers · Four countries</p>

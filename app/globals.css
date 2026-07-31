@@ -141,3 +141,16 @@ section.relative.overflow-hidden::after {
   content:""; position:absolute; inset:0; z-index:-1; pointer-events:none;
   background: linear-gradient(105deg, rgba(250,247,241,.62) 0%, rgba(250,247,241,.28) 42%, rgba(250,247,241,0) 70%);
 }
+
+/* ── Real photo heroes: show richly, keep left text legible, scope scrim to heroes ── */
+.hero-shell .hero-photo { opacity: .96; filter: saturate(.98); }
+.hero-shell::after {
+  content:""; position:absolute; inset:0; z-index:-1; pointer-events:none;
+  background:
+    linear-gradient(100deg, rgba(250,247,241,.93) 0%, rgba(250,247,241,.78) 28%, rgba(250,247,241,.30) 54%, rgba(250,247,241,0) 76%),
+    linear-gradient(0deg, rgba(250,247,241,.55), rgba(250,247,241,0) 30%);
+}
+/* remove the old broad scrim from non-hero sections (e.g. illustrated band) */
+section.relative.overflow-hidden:not(.hero-shell)::after { content: none; }
+/* on wide screens the form column sits over the photo — give it a touch more lift */
+.hero-shell .card-soft { box-shadow: var(--e3); }
