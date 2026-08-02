@@ -6,6 +6,8 @@ import { situations } from '@/data/situations';
 import { situationIcon, IconHouse, IconCash, IconCalendar } from '@/components/Icons';
 import TrustBar from '@/components/TrustBar';
 import TrustSignals from '@/components/TrustSignals';
+import TrustFeature from '@/components/TrustFeature';
+import ClosingCTA from '@/components/ClosingCTA';
 import { SITE_URL } from '@/lib/config';
 
 export const metadata: Metadata = {
@@ -86,6 +88,8 @@ export default function Home() {
         </div>
       </section>
 
+      <TrustFeature />
+
       {/* SITUATIONS */}
       <section className="mx-auto max-w-5xl px-4 py-16">
         <h2 className="h-display text-center text-3xl font-bold text-ink md:text-4xl">Whatever the situation</h2>
@@ -127,6 +131,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <ClosingCTA />
     </>
   );
 }
