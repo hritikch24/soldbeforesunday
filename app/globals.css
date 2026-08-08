@@ -154,3 +154,35 @@ section.relative.overflow-hidden::after {
 section.relative.overflow-hidden:not(.hero-shell)::after { content: none; }
 /* on wide screens the form column sits over the photo — give it a touch more lift */
 .hero-shell .card-soft { box-shadow: var(--e3); }
+
+/* ═══ HERO LEGIBILITY FIX ═══
+   Text side gets a near-solid cream wash so dark headline + gold accent are
+   always readable; the photo stays visible on the right and behind the form.
+   Later rules override the earlier weaker scrim. */
+.hero-shell .hero-photo { opacity: .9; filter: saturate(.97); }
+
+.hero-shell::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(100deg,
+    rgba(250,247,241,.98) 0%,
+    rgba(250,247,241,.97) 46%,
+    rgba(250,247,241,.82) 60%,
+    rgba(250,247,241,.38) 76%,
+    rgba(250,247,241,0) 94%);
+}
+
+/* Mobile / stacked: text sits over the full-width photo, so use a near-solid
+   cream veil and drop the photo back — readability first on small screens. */
+@media (max-width: 1023px) {
+  .hero-shell::after {
+    background: linear-gradient(180deg, rgba(250,247,241,.92), rgba(250,247,241,.86));
+  }
+  .hero-shell .hero-photo { opacity: .5; }
+}
+
+/* Belt-and-braces: a faint cream halo on hero headings for any stray overlap. */
+.hero-shell h1 { text-shadow: 0 1px 0 rgba(250,247,241,.6); }
