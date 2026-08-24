@@ -32,6 +32,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
       views, sessions, topPages, topReferrers, devices, browsers, countries, ips, utmSources, viewSeries,
       leadsTotal, leadsByStatus, leadsByCountry, leadsByCity, leadsByReason, leadSeries, recentLeads,
       callsTotal, callsByPage, callSeries, recentCalls,
+      engagementActions,
     ] = await Promise.all([
       q<{ n: bigint }>(`SELECT COUNT(*)::bigint AS n FROM "Event" WHERE "type"='pageview' AND "createdAt" >= $1`),
       q<{ n: bigint }>(`SELECT COUNT(DISTINCT COALESCE("session", "ip"))::bigint AS n FROM "Event" WHERE "type"='pageview' AND "createdAt" >= $1`),
@@ -54,6 +55,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
       q<{ label: string; n: bigint }>(`SELECT COALESCE("page",'—') AS label, COUNT(*)::bigint AS n FROM "Event" WHERE "type"='call_click' AND "createdAt" >= $1 GROUP BY 1 ORDER BY n DESC LIMIT 15`),
       q<{ date: string; n: bigint }>(`SELECT ${bucket} AS date, COUNT(*)::bigint AS n FROM "Event" WHERE "type"='call_click' AND "createdAt" >= $1 GROUP BY 1 ORDER BY 1 ASC`),
       q<{ page: string; phone: string; device: string; country: string; created_at: Date }>(`SELECT COALESCE("page",'') AS page, COALESCE("phone",'') AS phone, COALESCE("device",'') AS device, COALESCE("country",'') AS country, "createdAt" AS created_at FROM "Event" WHERE "type"='call_click' AND "createdAt" >= $1 ORDER BY "createdAt" DESC LIMIT 30`),
+      q<{ label: string; n: bigint }>(`SELECT COALESCE("action",'unknown') AS label, COUNT(*)::bigint AS n FROM "Event" WHERE "type"='engagement' AND "createdAt" >= $1 GROUP BY 1 ORDER BY n DESC LIMIT 30`),
     ]);
 
     const num = (r: { n: bigint }[]) => Number(r[0]?.n ?? 0);
@@ -79,6 +81,9 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
         byPage: ser(callsByPage),
         series: ser(callSeries),
         recent: recentCalls.map((r) => ({ ...r, created_at: new Date(r.created_at).toISOString() })),
+      },
+      engagement: {
+        actions: ser(engagementActions),
       },
     });
   } catch (err) {

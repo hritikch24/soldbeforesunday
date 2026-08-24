@@ -15,6 +15,7 @@ interface Metrics {
   traffic: { totalViews: number; uniqueSessions: number; topPages: Row[]; topReferrers: Row[]; devices: Row[]; browsers: Row[]; countries: Row[]; ips: Row[]; utmSources: Row[]; series: Point[] };
   leads: { total: number; byStatus: Row[]; byCountry: Row[]; byCity: Row[]; byReason: Row[]; series: Point[]; recent: LeadRow[] };
   calls: { total: number; byPage: Row[]; series: Point[]; recent: CallRow[] };
+  engagement?: { actions: Row[] };
 }
 
 const PERIODS = [
@@ -96,6 +97,41 @@ function Series({ title, points }: { title: string; points: Point[] }) {
           </div>
         </>
       )}
+    </div>
+  );
+}
+
+function Funnel({ title, steps }: { title: string; steps: Row[] }) {
+  const top = Math.max(steps[0]?.n ?? 1, 1);
+  return (
+    <div className="rounded-2xl border border-slate-200 bg-white p-5">
+      <h2 className="text-sm font-bold text-slate-900">{title}</h2>
+      <div className="mt-4 space-y-2">
+        {steps.map((s, i) => {
+          const pct = top > 0 ? ((s.n / top) * 100) : 0;
+          const dropoff = i > 0 && steps[i - 1].n > 0 ? Math.round(((steps[i - 1].n - s.n) / steps[i - 1].n) * 100) : null;
+          return (
+            <div key={s.label}>
+              <div className="mb-1 flex items-center justify-between text-sm">
+                <span className="text-slate-600">{s.label}</span>
+                <span className="ml-2 flex items-center gap-2">
+                  <span className="font-semibold tabular-nums text-slate-900">{s.n.toLocaleString()}</span>
+                  {dropoff !== null && dropoff > 0 && (
+                    <span className="rounded-full bg-red-50 px-1.5 py-0.5 text-[10px] font-semibold text-red-600">-{dropoff}%</span>
+                  )}
+                </span>
+              </div>
+              <div className="h-5 overflow-hidden rounded-full bg-slate-100">
+                <div
+                  className={`h-full rounded-full transition-all ${i === steps.length - 1 && s.n > 0 ? 'bg-emerald-500' : 'bg-blue-500'}`}
+                  style={{ width: `${Math.max(pct, s.n > 0 ? 3 : 0)}%` }}
+                />
+              </div>
+            </div>
+          );
+        })}
+        {steps.every((s) => s.n === 0) && <p className="py-4 text-center text-sm text-slate-400">No data yet</p>}
+      </div>
     </div>
   );
 }
@@ -203,6 +239,49 @@ export default function MetricsPage() {
               <Bars title="Call clicks by page" rows={data.calls.byPage} />
               <Bars title="Top IPs" rows={data.traffic.ips} />
             </div>
+
+            {/* ENGAGEMENT & FUNNEL */}
+            {data.engagement && data.engagement.actions.length > 0 && (() => {
+              const acts = data.engagement!.actions;
+              const get = (key: string) => acts.find((a) => a.label === key)?.n ?? 0;
+              const scrollData = [
+                { label: 'Scroll 25%', n: get('scroll_25') },
+                { label: 'Scroll 50%', n: get('scroll_50') },
+                { label: 'Scroll 75%', n: get('scroll_75') },
+                { label: 'Scroll 100%', n: get('scroll_100') },
+              ];
+              const formSteps = [
+                { label: 'Step 1: Address', n: get('form_step_0') },
+                { label: 'Step 2: Property', n: get('form_step_1') },
+                { label: 'Step 3: Situation', n: get('form_step_2') },
+                { label: 'Step 4: Contact', n: get('form_step_3') },
+                { label: 'Submitted', n: get('form_submit') },
+              ];
+              const timeData = [
+                { label: '30 seconds', n: get('time_30s') },
+                { label: '1 minute', n: get('time_60s') },
+                { label: '2 minutes', n: get('time_120s') },
+                { label: '5 minutes', n: get('time_300s') },
+              ];
+              const sections = acts.filter((a) => a.label.startsWith('section_seen:'))
+                .map((a) => ({ label: a.label.replace('section_seen:', ''), n: a.n }));
+
+              return (
+                <>
+                  <h2 className="mt-10 text-xl font-extrabold text-slate-900">User Engagement & Drop-off</h2>
+                  <div className="mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                    <Funnel title="Lead form funnel" steps={formSteps} />
+                    <Funnel title="Scroll depth" steps={scrollData} />
+                    <Funnel title="Time on page" steps={timeData} />
+                  </div>
+                  {sections.length > 0 && (
+                    <div className="mt-4 grid gap-4 md:grid-cols-2">
+                      <Bars title="Sections viewed" rows={sections} max={15} />
+                    </div>
+                  )}
+                </>
+              );
+            })()}
 
             <h2 className="mt-10 text-xl font-extrabold text-slate-900">Recent leads ({data.leads.recent.length})</h2>
             <div className="mt-3 overflow-x-auto rounded-2xl border border-slate-200 bg-white">

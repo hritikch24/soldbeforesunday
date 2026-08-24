@@ -9,6 +9,7 @@ import FloatingWhatsApp from '@/components/FloatingWhatsApp';
 import StickyCTA from '@/components/StickyCTA';
 import LeadPopup from '@/components/LeadPopup';
 import ScrollReveal from '@/components/ScrollReveal';
+import EngagementTracker from '@/components/EngagementTracker';
 import SchemaMarkup from '@/components/SchemaMarkup';
 import { SITE_NAME, SITE_URL, GSC_VERIFICATION, CONTACT_EMAIL, PHONE } from '@/lib/config';
 
@@ -77,6 +78,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <FloatingWhatsApp />
         <Analytics />
         <PageTracker />
+        <EngagementTracker />
       </body>
     </html>
   );

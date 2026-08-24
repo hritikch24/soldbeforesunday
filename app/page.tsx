@@ -27,7 +27,7 @@ export default function Home() {
   return (
     <>
       {/* HERO */}
-      <section className="hero-shell relative overflow-hidden">
+      <section data-section="hero" className="hero-shell relative overflow-hidden">
         <div className="aurora" aria-hidden />
         <div className="mx-auto max-w-5xl px-4 py-16 text-center md:py-24">
           <p className="text-sm font-bold uppercase tracking-[0.25em] text-moss">Vetted cash buyers · US · UK · Canada · Australia</p>
@@ -42,7 +42,7 @@ export default function Home() {
       </section>
 
       {/* PHOTO COUNTRY TILES */}
-      <section className="mx-auto max-w-6xl px-4 pb-4" id="countries">
+      <section data-section="country-tiles" className="mx-auto max-w-6xl px-4 pb-4" id="countries">
         <p className="text-center text-sm font-bold uppercase tracking-[0.25em] text-ink/50">Where is your property?</p>
         <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {countries.map((c) => (
@@ -70,7 +70,7 @@ export default function Home() {
       <TrustBar />
 
       {/* HOW IT WORKS */}
-      <section className="bg-paper py-16">
+      <section data-section="how-it-works" className="bg-paper py-16">
         <div className="mx-auto max-w-5xl px-4">
           <h2 className="h-display text-center text-3xl font-bold text-ink md:text-4xl">Three steps. That’s the whole process.</h2>
           <div className="mt-10 grid gap-6 md:grid-cols-3">
@@ -91,7 +91,7 @@ export default function Home() {
       <TrustFeature />
 
       {/* SITUATIONS */}
-      <section className="mx-auto max-w-5xl px-4 py-16">
+      <section data-section="situations" className="mx-auto max-w-5xl px-4 py-16">
         <h2 className="h-display text-center text-3xl font-bold text-ink md:text-4xl">Whatever the situation</h2>
         <p className="mx-auto mt-3 max-w-2xl text-center text-ink/70">
           The reasons people need a fast sale are rarely simple. These are the ones we help with most.
@@ -112,7 +112,7 @@ export default function Home() {
       <TrustSignals />
 
       {/* WHERE WE BUY (SEO city links, cleaner) */}
-      <section className="bg-paper py-14">
+      <section data-section="where-we-buy" className="bg-paper py-14">
         <div className="mx-auto max-w-6xl px-4">
           <h2 className="h-display text-center text-2xl font-bold text-ink">Where we buy</h2>
           <div className="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">

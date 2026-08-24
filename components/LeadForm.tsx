@@ -1,7 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { GOOGLE_ADS_ID, ADS_LEAD_LABEL } from '@/lib/config';
+import { trackEvent } from './PageTracker';
 
 const inputCls = 'w-full rounded-xl border border-[#ddd5c4] bg-white p-3.5 text-ink placeholder:text-ink/40 focus:border-gold focus:outline-none';
 const btnCls = 'w-full rounded-full bg-ink py-4 text-lg font-bold text-white transition hover:bg-ink-soft disabled:opacity-60';
@@ -11,6 +12,14 @@ export default function LeadForm({ country, city, compact = false }: { country: 
   const [d, setD] = useState<Record<string, string>>({ country, city: city ?? '' });
   const [busy, setBusy] = useState(false);
   const [done, setDone] = useState(false);
+  const trackedSteps = useRef(new Set<number>());
+
+  useEffect(() => {
+    if (!trackedSteps.current.has(step)) {
+      trackedSteps.current.add(step);
+      trackEvent('engagement', { action: `form_step_${step}` });
+    }
+  }, [step]);
 
   const set = (k: string) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) =>
     setD((p) => ({ ...p, [k]: e.target.value }));
@@ -30,6 +39,7 @@ export default function LeadForm({ country, city, compact = false }: { country: 
           w.gtag('event', 'conversion', { send_to: `${GOOGLE_ADS_ID}/${ADS_LEAD_LABEL}` });
         }
       }
+      trackEvent('engagement', { action: 'form_submit' });
       setDone(true);
     } finally {
       setBusy(false);

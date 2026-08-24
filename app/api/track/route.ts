@@ -7,7 +7,8 @@ import { SITE_NAME } from '@/lib/config';
 export async function POST(req: NextRequest) {
   const data = (await req.json().catch(() => ({}))) as Record<string, unknown>;
   const str = (k: string, max = 500) => (typeof data[k] === 'string' && (data[k] as string).length > 0 ? (data[k] as string).slice(0, max) : null);
-  const type = str('event') === 'call_click' ? 'call_click' : 'pageview';
+  const rawEvent = str('event');
+  const type = rawEvent === 'call_click' ? 'call_click' : rawEvent === 'engagement' ? 'engagement' : 'pageview';
   const page = str('page');
   if (page && (page.startsWith('/metrics') || page.startsWith('/admin') || page.startsWith('/api'))) {
     return NextResponse.json({ ok: true });
