@@ -49,3 +49,14 @@ export const cities: City[] = [
 export function citiesFor(country: string) {
   return cities.filter((c) => c.country === country);
 }
+
+// Two cities share the name "Birmingham" (Alabama and the West Midlands), which
+// gave them identical titles and H1s. Disambiguate only the names that actually
+// collide, so the other 30 city pages keep the titles Google already indexed.
+const ambiguous = new Set(
+  cities.map((c) => c.name).filter((n, i, a) => a.indexOf(n) !== i)
+);
+
+export function cityLabel(c: City) {
+  return ambiguous.has(c.name) ? `${c.name}, ${c.region}` : c.name;
+}

@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { countries, getCountry } from '@/data/countries';
 import { citiesFor } from '@/data/cities';
+import { regionsFor } from '@/data/regions';
 import { situations } from '@/data/situations';
 import { faqsFor } from '@/data/faqs';
 import HowItWorks from '@/components/HowItWorks';
@@ -44,6 +45,8 @@ export default async function CountryPage({ params }: { params: Promise<{ countr
   const c = getCountry(country);
   if (!c) notFound();
 
+  const regionKind = regionsFor(c.slug)[0]?.kind ?? 'Region';
+
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'Service',
@@ -69,6 +72,20 @@ export default async function CountryPage({ params }: { params: Promise<{ countr
       <section className="bg-paper py-14">
         <div className="mx-auto max-w-6xl px-4">
           <h2 className="h-display text-2xl font-bold text-ink">We Buy Houses Across {c.nameWithThe}</h2>
+          <p className="mt-2 max-w-2xl text-ink/65">
+            Every {regionKind.toLowerCase()} has its own rules on timelines, {c.processTerm} and what a lender can do
+            when you fall behind. Pick yours to see what actually applies where your property is.
+          </p>
+          <div className="mt-5 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+            {regionsFor(c.slug).map((r) => (
+              <Link key={r.slug} href={`/${c.slug}/${r.slug}`} className="card-soft px-4 py-3 text-sm font-semibold text-ink transition hover:-translate-y-0.5">
+                {r.name}
+                {r.abbr && <span className="ml-1.5 font-mono text-xs font-normal text-ink/40">{r.abbr}</span>}
+              </Link>
+            ))}
+          </div>
+
+          <h2 className="mt-10 h-display text-2xl font-bold text-ink">Cities we cover in depth</h2>
           <div className="mt-4 flex flex-wrap gap-2">
             {citiesFor(c.slug).map((city) => (
               <Link key={city.slug} href={`/${c.slug}/${city.slug}`} className="rounded-full border border-[#ddd5c4] bg-white px-4 py-1.5 text-sm text-ink/70 hover:border-gold hover:text-ink">

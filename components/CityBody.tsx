@@ -1,8 +1,8 @@
-import type { Metadata } from 'next';
-import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { getCountry } from '@/data/countries';
-import { cities, citiesFor } from '@/data/cities';
+import type { Country } from '@/data/countries';
+import type { City } from '@/data/cities';
+import { citiesFor, cityLabel } from '@/data/cities';
+import { regionsFor } from '@/data/regions';
 import { situations } from '@/data/situations';
 import { faqsFor } from '@/data/faqs';
 import LeadForm from '@/components/LeadForm';
@@ -18,29 +18,16 @@ import Breadcrumbs from '@/components/Breadcrumbs';
 import SchemaMarkup from '@/components/SchemaMarkup';
 import { SITE_URL } from '@/lib/config';
 
-export function generateStaticParams() {
-  return cities.map((c) => ({ country: c.country, city: c.slug }));
+// The region whose `metros` list names this city — lets a city page link "up"
+// to its state/province so neither layer is an orphan in the crawl graph.
+function parentRegion(co: Country, ci: City) {
+  return regionsFor(co.slug).find(
+    (r) => r.metros.some((m) => m.toLowerCase().startsWith(ci.name.toLowerCase())) || r.name === ci.region
+  );
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ country: string; city: string }> }): Promise<Metadata> {
-  const { country, city } = await params;
-  const co = getCountry(country);
-  const ci = cities.find((x) => x.slug === city && x.country === country);
-  if (!co || !ci) return {};
-  return {
-    title: `Sell My House Fast ${ci.name} — Cash Offer in 24–48h`,
-    description: `Sell your house fast in ${ci.name}, ${ci.region}. Free cash offer from vetted local buyers — any condition, no fees, ${co.processTerm} in ${co.days}.`,
-    openGraph: { title: `Sell My House Fast ${ci.name} — Cash Offer in 24–48h`, description: ci.blurb, url: `/${country}/${city}` },
-    alternates: { canonical: `/${country}/${city}` },
-  };
-}
-
-export default async function CityPage({ params }: { params: Promise<{ country: string; city: string }> }) {
-  const { country, city } = await params;
-  const co = getCountry(country);
-  const ci = cities.find((x) => x.slug === city && x.country === country);
-  if (!co || !ci) notFound();
-
+export default function CityBody({ co, ci }: { co: Country; ci: City }) {
+  const parent = parentRegion(co, ci);
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'Service',
@@ -53,12 +40,19 @@ export default async function CityPage({ params }: { params: Promise<{ country: 
   return (
     <>
       <SchemaMarkup schema={schema} />
-      <Breadcrumbs crumbs={[{ href: '/', label: 'Home' }, { href: `/${co.slug}`, label: co.name }, { href: `/${co.slug}/${ci.slug}`, label: ci.name }]} />
+      <Breadcrumbs
+        crumbs={[
+          { href: '/', label: 'Home' },
+          { href: `/${co.slug}`, label: co.name },
+          ...(parent ? [{ href: `/${co.slug}/${parent.slug}`, label: parent.name }] : []),
+          { href: `/${co.slug}/${ci.slug}`, label: ci.name },
+        ]}
+      />
       <section className="hero-shell relative overflow-hidden">
         <div className="hero-photo" style={{ backgroundImage: `image-set(url(/images/hero-${co.slug}.jpg) 1x)` }} aria-hidden />
         <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 lg:grid-cols-2 lg:items-center">
           <div>
-            <h1 className="h-display fluid-hero font-bold text-ink">Sell Your House Fast in {ci.name}</h1>
+            <h1 className="h-display fluid-hero font-bold text-ink">Sell Your House Fast in {cityLabel(ci)}</h1>
             <p className="mt-4 text-lg leading-relaxed text-ink/70">{ci.blurb}</p>
             <ul className="mt-6 space-y-2 font-medium text-ink/80">
               <li>✓ Cash offer within 24–48 hours — free, no obligation</li>
@@ -97,6 +91,16 @@ export default async function CityPage({ params }: { params: Promise<{ country: 
               </Link>
             ))}
           </div>
+          {parent && (
+            <>
+              <h2 className="mt-8 h-display text-xl font-bold text-ink">Selling elsewhere in {parent.name}?</h2>
+              <p className="mt-2 text-ink/70">
+                <Link href={`/${co.slug}/${parent.slug}`} className="font-semibold text-moss underline underline-offset-4">
+                  See how a fast sale works across {parent.name} →
+                </Link>
+              </p>
+            </>
+          )}
           <h2 className="mt-8 h-display text-xl font-bold text-ink">Other areas in {co.nameWithThe}</h2>
           <div className="mt-4 flex flex-wrap gap-2">
             {citiesFor(co.slug).filter((x) => x.slug !== ci.slug).map((x) => (
