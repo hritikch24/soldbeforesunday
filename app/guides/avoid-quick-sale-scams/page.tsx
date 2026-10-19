@@ -1,34 +1,23 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
-import Breadcrumbs from '@/components/Breadcrumbs';
-import SchemaMarkup from '@/components/SchemaMarkup';
-import { SITE_NAME, SITE_URL } from '@/lib/config';
+import GuideArticle from '@/components/GuideArticle';
 
-export const metadata: Metadata = {
-  title: 'How to Spot and Avoid Quick-Sale Scams',
-  description: 'The five scams that target motivated home sellers, the three checks that defeat all of them, and the questions genuine cash buyers answer without flinching.',
-  alternates: { canonical: '/guides/avoid-quick-sale-scams' },
-  openGraph: { title: 'How to Spot and Avoid Quick-Sale Scams', description: 'Five scams, three checks that defeat them.', url: '/guides/avoid-quick-sale-scams' },
-};
+const title = "How to Check a UK Cash House Buyer";
+const description = "Reduce the risks of a quick UK property sale: check buyer identity, proof of funds, fees, price conditions and your own solicitor before signing.";
+export const metadata: Metadata = { title, description, alternates: { canonical: '/guides/avoid-quick-sale-scams' }, openGraph: { title, description, url: '/guides/avoid-quick-sale-scams' } };
 
-export default function Post() {
-  return (
-    <>
-      <SchemaMarkup schema={{ '@context': 'https://schema.org', '@type': 'Article', headline: 'How to Spot and Avoid Quick-Sale Scams', publisher: { '@type': 'Organization', name: SITE_NAME }, mainEntityOfPage: `${SITE_URL}/guides/avoid-quick-sale-scams` }} />
-      <Breadcrumbs crumbs={[{ href: '/', label: 'Home' }, { href: '/guides', label: 'Guides' }, { href: '/guides/avoid-quick-sale-scams', label: 'Avoiding Scams' }]} />
-      <article className="mx-auto max-w-3xl px-4 pb-16">
-        <h1 className="h-display text-3xl font-bold text-ink md:text-4xl">How to Spot and Avoid Quick-Sale Scams</h1>
-        <div className="mt-6 space-y-4 text-lg leading-relaxed text-ink/75">
-          <p>Distressed sellers attract predators — that&rsquo;s an industry fact and we&rsquo;d rather you read this than learn it. Here are the five patterns, and the checks that beat every one of them.</p>
-          <h2 className="h-display text-2xl font-bold text-ink">The five scams</h2>
-          <p><strong>The vanishing offer:</strong> a high offer to win your signature, then a steep &ldquo;revised&rdquo; price days before completion, when you&rsquo;re too committed to walk. <strong>The fee collector:</strong> charges for &ldquo;valuations,&rdquo; &ldquo;processing&rdquo; or &ldquo;legal packs&rdquo; before any purchase — genuine buyers never charge sellers anything. <strong>The option trap:</strong> a contract that doesn&rsquo;t oblige them to buy at all, just locks you in while they shop your house around. <strong>The phantom buyer:</strong> no funds, no company, no history — they&rsquo;re brokering your desperation to someone else without telling you. <strong>The equity skimmer:</strong> targets owners in arrears with &ldquo;we&rsquo;ll take over the payments&rdquo; arrangements that leave your name on the debt and their name on the deed.</p>
-          <h2 className="h-display text-2xl font-bold text-ink">The three checks that defeat all of them</h2>
-          <p><strong>One — proof of funds, always.</strong> A bank statement or legal confirmation that the money exists, dated this month. Genuine buyers provide it within a day, unprompted, without irritation. <strong>Two — your own legal representative.</strong> Never use a lawyer the buyer &ldquo;provides&rdquo;; your own reviews the contract for option traps and price-change clauses before you sign anything. <strong>Three — never pay anything.</strong> The rule has no exceptions: sellers pay nothing, ever. Anyone requesting a fee has told you who they are.</p>
-          <h2 className="h-display text-2xl font-bold text-ink">Questions a genuine buyer answers without flinching</h2>
-          <p>How many properties did you buy in the last year, and can you evidence one? What&rsquo;s your registered company name and number? Will you confirm the offer and completion date in writing? Can my solicitor or attorney review before I sign? Hesitation on any of these is your answer.</p>
-          <p>This is also why <Link href="/how-it-works" className="text-moss underline">our network vets buyers</Link> on exactly these criteria before they ever see your details — but the checks above are yours to run on anyone, including buyers we introduce. Trust the process, verify the people.</p>
-        </div>
-      </article>
-    </>
-  );
+export default function Guide() {
+  return <GuideArticle slug="avoid-quick-sale-scams" title={title} description={description} sources={[{"label": "MoneyHelper: quick-sale checks and alternatives", "url": "https://www.moneyhelper.org.uk/en/homes/buying-a-home/quick-house-sales"}, {"label": "GOV.UK: property redress schemes", "url": "https://www.gov.uk/redress-scheme-estate-agencies"}]}>
+
+        <p>A time-sensitive sale is a reason to check the paperwork carefully. No set of checks eliminates every risk, but clear written information makes an offer easier to assess.</p>
+        <h2 className="h-display text-2xl font-bold text-ink">Identify the buyer and how the purchase is funded</h2>
+        <p>Ask which legal person or company will buy the property, who you are dealing with and how they are paid. If someone is introducing a third-party buyer, that role and any referral arrangement should be clear. Ask your solicitor to verify evidence of available funds.</p>
+        <h2 className="h-display text-2xl font-bold text-ink">Read the conditions behind the headline price</h2>
+        <p>Check whether the offer is subject to a survey, valuation, finance or another sale. Ask what could change the price and whether any exclusivity or option agreement restricts your ability to sell elsewhere. Have your solicitor explain the effect before you sign.</p>
+        <h2 className="h-display text-2xl font-bold text-ink">Separate our fee from other sale costs</h2>
+        <p>Our homeowner enquiry and introduction fee is £0. Independent legal work, leasehold documents or mortgage redemption can still involve costs. Obtain a written breakdown and query unexpected advance payment requests; a fee alone does not establish fraud.</p>
+        <h2 className="h-display text-2xl font-bold text-ink">Use independent advice and verify claimed memberships</h2>
+        <p>Choose a solicitor who can advise you independently. Check any claimed registration, trade membership or redress scheme with the relevant organisation directly. Do not rely on a logo or a promise of a guaranteed completion.</p>
+        <h2 className="h-display text-2xl font-bold text-ink">Keep records and raise concerns promptly</h2>
+        <p>Retain the written offer, cost breakdown and correspondence. If terms change, ask for the reason and consult your solicitor before accepting. Raise complaints with the business and check whether an applicable redress scheme can consider them.</p>
+  </GuideArticle>;
 }

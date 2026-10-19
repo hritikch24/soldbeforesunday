@@ -3,8 +3,8 @@ import { IconHouse, IconCash, IconCalendar } from './Icons';
 export default function HowItWorks({ processTerm, days }: { processTerm: string; days: string }) {
   const steps: [React.ReactNode, string, string][] = [
     [<IconHouse key="i" className="h-7 w-7 text-gold" />, 'Tell us about the property', 'Two minutes, online, free. Address, condition, and your timeline — that’s all a buyer needs to start.'],
-    [<IconCash key="i" className="h-7 w-7 text-gold" />, 'Get a fair cash offer', 'A vetted cash buyer active in your area reviews the details and makes a no-obligation offer, usually within 24–48 hours.'],
-    [<IconCalendar key="i" className="h-7 w-7 text-gold" />, `${processTerm[0].toUpperCase()}${processTerm.slice(1)} on your date`, `Accept, and the buyer moves at your pace — ${days}, or longer if you need it. No chain, no bank approvals, no fall-throughs.`],
+    [<IconCash key="i" className="h-7 w-7 text-gold" />, 'Get a fair cash offer', 'We review your enquiry, explain any suitable buyer introduction and confirm permission before sharing your details. An offer depends on buyer availability and assessment.'],
+    [<IconCalendar key="i" className="h-7 w-7 text-gold" />, `${processTerm[0].toUpperCase()}${processTerm.slice(1)} on your date`, `If you accept an offer, aim for ${days}. Your solicitor confirms the legal steps, costs and date. A cash sale can still be delayed or fall through.`],
   ];
   return (
     <section className="bg-paper py-16">

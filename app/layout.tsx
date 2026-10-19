@@ -11,6 +11,7 @@ import LeadPopup from '@/components/LeadPopup';
 import ScrollReveal from '@/components/ScrollReveal';
 import EngagementTracker from '@/components/EngagementTracker';
 import SchemaMarkup from '@/components/SchemaMarkup';
+import CookieConsent from '@/components/CookieConsent';
 import { SITE_NAME, SITE_URL, GSC_VERIFICATION, CONTACT_EMAIL, PHONE } from '@/lib/config';
 
 const fraunces = Fraunces({ subsets: ['latin'], variable: '--font-fraunces', display: 'swap', weight: ['400', '600', '700'] });
@@ -22,16 +23,17 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
     template: `%s | ${SITE_NAME}`,
-    default: `Sell Your House Fast for Cash | ${SITE_NAME}`,
+    default: `Sell Your House Fast UK | ${SITE_NAME}`,
   },
-  description: 'Get a free, no-obligation cash offer on your house in 24–48 hours. No fees, no repairs, no agents. Vetted local cash buyers in the US, UK, Canada and Australia.',
+  description: 'Request a free UK cash-buyer introduction for your house or flat. England, Scotland, Wales and Northern Ireland. No obligation; buyer availability varies.',
   verification: GSC_VERIFICATION ? { google: GSC_VERIFICATION } : undefined,
   openGraph: {
     type: 'website',
     url: SITE_URL,
     siteName: SITE_NAME,
-    title: `${SITE_NAME} | Sell Your House Fast for Cash`,
-    description: 'Free cash offer in 24–48 hours. No fees, no repairs, no agents.',
+    title: `${SITE_NAME} | Sell Your House Fast UK`,
+    description: 'Free cash-buyer introductions throughout the UK. No obligation to accept an offer.',
+    locale: 'en_GB',
   },
   twitter: { card: 'summary_large_image' },
   robots: { index: true, follow: true },
@@ -43,8 +45,9 @@ const orgSchema = {
   '@id': `${SITE_URL}/#org`,
   name: SITE_NAME,
   url: SITE_URL,
-  description: 'A connection service matching homeowners who need a fast sale with vetted local cash property buyers in the US, UK, Canada and Australia.',
-  areaServed: ['United States', 'United Kingdom', 'Canada', 'Australia'],
+  description: 'A UK property introduction service connecting homeowners with independent cash buyers.',
+  areaServed: { '@type': 'Country', name: 'United Kingdom' },
+  telephone: PHONE,
   contactPoint: {
     '@type': 'ContactPoint',
     contactType: 'customer support',
@@ -64,7 +67,7 @@ const websiteSchema = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${fraunces.variable} ${inter.variable}`}>
+    <html lang="en-GB" className={`${fraunces.variable} ${inter.variable}`}>
       <body className="bg-cream pb-16 text-ink md:pb-0">
         <SchemaMarkup schema={orgSchema} />
         <SchemaMarkup schema={websiteSchema} />
@@ -76,6 +79,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <LeadPopup />
         <ScrollReveal />
         <FloatingWhatsApp />
+        <CookieConsent />
         <Analytics />
         <PageTracker />
         <EngagementTracker />

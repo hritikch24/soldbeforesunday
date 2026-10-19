@@ -4,10 +4,12 @@ import Script from 'next/script';
 import { useEffect } from 'react';
 import { GA_ID, GOOGLE_ADS_ID } from '@/lib/config';
 import { trackEvent } from './PageTracker';
+import { useTrackingConsent } from '@/lib/tracking-consent';
 
 const TAG_ID = GA_ID || GOOGLE_ADS_ID;
 
 export default function Analytics() {
+  const consent = useTrackingConsent();
   useEffect(() => {
     const handler = (e: MouseEvent) => {
       const a = (e.target as HTMLElement | null)?.closest?.('a[href^="tel:"]') as HTMLAnchorElement | null;
@@ -20,12 +22,12 @@ export default function Analytics() {
     return () => document.removeEventListener('click', handler);
   }, []);
 
-  if (!TAG_ID) return null;
+  if (!TAG_ID || !consent) return null;
   return (
     <>
       <Script src={`https://www.googletagmanager.com/gtag/js?id=${TAG_ID}`} strategy="afterInteractive" />
       <Script id="gtag-init" strategy="afterInteractive">
-        {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());${GA_ID ? `gtag('config','${GA_ID}');` : ''}${GOOGLE_ADS_ID ? `gtag('config','${GOOGLE_ADS_ID}');` : ''}`}
+        {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{analytics_storage:'granted',ad_storage:'granted',ad_user_data:'granted',ad_personalization:'granted'});gtag('js',new Date());${GA_ID ? `gtag('config','${GA_ID}');` : ''}${GOOGLE_ADS_ID ? `gtag('config','${GOOGLE_ADS_ID}');` : ''}`}
       </Script>
     </>
   );

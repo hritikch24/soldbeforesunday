@@ -9,8 +9,8 @@ import { situations } from '@/data/situations';
 // `new Date()`, which told Google every URL was modified on every deploy —
 // Google responds by distrusting lastmod entirely and wasting crawl budget.
 // A stable, honest date is worth far more than a fresh one.
-const CONTENT_REVISED = new Date('2026-08-27');
-const EVERGREEN = new Date('2026-07-11');
+const CONTENT_REVISED = new Date('2026-10-20');
+const EVERGREEN = new Date('2026-10-20');
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const entries: MetadataRoute.Sitemap = [
@@ -29,13 +29,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
 
   for (const c of countries) {
-    entries.push({ url: `${SITE_URL}/${c.slug}`, lastModified: CONTENT_REVISED, priority: 0.9 });
     for (const s of situations) {
       entries.push({ url: `${SITE_URL}/${c.slug}/situations/${s.slug}`, lastModified: EVERGREEN, priority: 0.7 });
     }
   }
 
-  // Regions above cities: a state page is the broader query and the hub that
+  // Regions above cities: a regional page is the broader query and the hub that
   // links its cities, so it carries the higher priority of the two.
   for (const r of regions) {
     entries.push({ url: `${SITE_URL}/${r.country}/${r.slug}`, lastModified: CONTENT_REVISED, priority: 0.8 });

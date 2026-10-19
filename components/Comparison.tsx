@@ -1,14 +1,13 @@
 import { an, type Country } from '@/data/countries';
 
 export default function Comparison({ c }: { c: Country }) {
-  const isUK = c.slug === 'uk';
   const rows = [
-    ['Time to sell', `${c.days}`, '3–9 months, sometimes longer'],
-    ['Fees & commissions', 'None', c.agentFee],
-    ['Repairs & cleaning', 'Sell 100% as-is', 'Expected before listing'],
-    ['Viewings / showings', 'None', 'Weeks of strangers in your home'],
-    ['Certainty', isUK ? 'Cash — no chain, no financing' : 'Cash — no financing to fall through', 'Sales fall through regularly'],
-    [`${c.processTerm[0].toUpperCase()}${c.processTerm.slice(1)} date`, 'You choose it', isUK ? 'Whenever the chain allows' : "Whenever the buyer's lender allows"],
+    ['Time to sell', 'Depends on checks and buyer readiness', 'Depends on buyer, finance and any chain'],
+    ['Service fees', 'Our introduction is free; other sale costs may apply', 'Agent fee under your agreed contract'],
+    ['Property condition', 'Buyer assesses it as it stands', 'Price and presentation depend on the market'],
+    ['Viewings', 'An inspection may be needed', 'Viewings arranged with prospective buyers'],
+    ['Sale risk', 'Can be delayed or fall through', 'Can be delayed or fall through'],
+    [`${c.processTerm[0].toUpperCase()}${c.processTerm.slice(1)} date`, 'Agreed with the buyer and solicitor', 'Agreed around checks, finance and any chain'],
   ];
   return (
     <section className="mx-auto max-w-4xl px-4 py-16">
@@ -18,7 +17,7 @@ export default function Comparison({ c }: { c: Country }) {
           <thead>
             <tr className="bg-ink text-left text-white">
               <th className="p-4"></th>
-              <th className="p-4 font-semibold">Cash sale via us</th>
+              <th className="p-4 font-semibold">Independent cash buyer</th>
               <th className="p-4 font-semibold opacity-70">Listing with {an(c.agentTerm)}</th>
             </tr>
           </thead>

@@ -7,8 +7,9 @@ import SchemaMarkup from '@/components/SchemaMarkup';
 
 export const metadata: Metadata = {
   title: 'FAQ — Selling Your House Fast, Every Question Answered',
-  description: 'Timelines, fees, below-market trade-offs, scam protection, tenants, probate, mortgages — every question sellers ask about fast cash house sales, answered honestly for the US, UK, Canada and Australia.',
+  description: 'UK cash house sale questions answered: coverage, fees, timelines, buyer checks, inherited property, tenants and how your personal information is used.',
   alternates: { canonical: '/faq' },
+  openGraph: { title: 'FAQ — Selling Your House Fast, Every Question Answered', description: 'UK cash house sale questions answered: coverage, fees, timelines, buyer checks, inherited property, tenants and how your personal information is used.', url: '/faq' },
 };
 
 export default function FAQPage() {

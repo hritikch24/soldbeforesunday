@@ -14,12 +14,10 @@ import Breadcrumbs from '@/components/Breadcrumbs';
 import SchemaMarkup from '@/components/SchemaMarkup';
 import { SITE_URL } from '@/lib/config';
 
-// Cities we already have a dedicated page for that sit inside this region.
-// Matches either on the city's own region label (US states) or on the region's
-// metro list (UK/CA/AU, where the labels differ).
+// Resolve exact city membership to avoid cross-linking unrelated regions.
 export function citiesInRegion(r: Region) {
   return citiesFor(r.country).filter(
-    (c) => c.region === r.name || c.region === r.abbr || r.metros.some((m) => m.toLowerCase().startsWith(c.name.toLowerCase()))
+    (c) => c.regionSlug === r.slug || (r.slug === 'england' && !['scotland', 'wales', 'northern-ireland'].includes(c.regionSlug ?? ''))
   );
 }
 
@@ -27,6 +25,7 @@ export default function RegionBody({ co, r }: { co: Country; r: Region }) {
   const inner = citiesInRegion(r);
   const innerSlugs = new Set(inner.map((c) => c.slug));
   const siblings = regionsFor(co.slug).filter((x) => x.slug !== r.slug);
+  const children = siblings.filter((x) => x.parentSlug === r.slug);
 
   const schema = {
     '@context': 'https://schema.org',
@@ -40,7 +39,7 @@ export default function RegionBody({ co, r }: { co: Country; r: Region }) {
   return (
     <>
       <SchemaMarkup schema={schema} />
-      <Breadcrumbs crumbs={[{ href: '/', label: 'Home' }, { href: `/${co.slug}`, label: co.name }, { href: `/${co.slug}/${r.slug}`, label: r.name }]} />
+      <Breadcrumbs crumbs={[{ href: '/', label: 'Home' }, { href: `/${co.slug}/${r.slug}`, label: r.name }]} />
 
       <section className="hero-shell relative overflow-hidden">
         <div className="hero-photo" style={{ backgroundImage: `image-set(url(/images/hero-${co.slug}.jpg) 1x)` }} aria-hidden />
@@ -50,9 +49,9 @@ export default function RegionBody({ co, r }: { co: Country; r: Region }) {
             <h1 className="h-display fluid-hero mt-3 font-bold text-ink">Sell Your House Fast in {r.name}</h1>
             <p className="mt-4 text-lg leading-relaxed text-ink/70">{r.intro}</p>
             <ul className="mt-6 space-y-2 font-medium text-ink/80">
-              <li>✓ Cash offer within 24–48 hours — free, no obligation</li>
+              <li>✓ Free cash-buyer enquiry, with no obligation to accept</li>
               <li>✓ Any condition, anywhere in {r.name}</li>
-              <li>✓ No {co.agentTerm} fees · {co.processTerm} in {co.days}</li>
+              <li>✓ No fee for our introduction; legal costs may apply</li>
             </ul>
           </div>
           <LeadForm country={co.slug} />
@@ -77,6 +76,9 @@ export default function RegionBody({ co, r }: { co: Country; r: Region }) {
             <p key={n.slice(0, 24)} className="leading-relaxed text-ink/75">{n}</p>
           ))}
         </div>
+        <div className="mt-5 flex flex-wrap gap-4 text-sm">
+          {r.sources.map((source) => <a key={source.url} href={source.url} className="text-moss underline">{source.label}</a>)}
+        </div>
         <p className="mt-6 rounded-xl bg-paper p-4 text-sm text-ink/55">
           General orientation only, not legal advice. Rules change and individual circumstances vary — confirm
           your position with a {co.lawyerTerm} in {r.name} before acting on a deadline.
@@ -90,7 +92,11 @@ export default function RegionBody({ co, r }: { co: Country; r: Region }) {
 
       <section className="bg-paper py-14">
         <div className="mx-auto max-w-6xl px-4">
-          <h2 className="h-display text-2xl font-bold text-ink">Where we buy in {r.name}</h2>
+          {children.length > 0 && <div className="mb-8">
+            <h2 className="h-display text-2xl font-bold text-ink">Regions of {r.name}</h2>
+            <div className="mt-4 flex flex-wrap gap-3">{children.map((region) => <Link key={region.slug} href={`/uk/${region.slug}`} className="text-moss underline">{region.name}</Link>)}</div>
+          </div>}
+          <h2 className="h-display text-2xl font-bold text-ink">Property enquiries across {r.name}</h2>
           <div className="mt-4 flex flex-wrap gap-2">
             {inner.map((c) => (
               <Link key={c.slug} href={`/${co.slug}/${c.slug}`} className="rounded-full border border-gold bg-white px-4 py-1.5 text-sm font-semibold text-ink hover:bg-gold-soft">
@@ -112,7 +118,7 @@ export default function RegionBody({ co, r }: { co: Country; r: Region }) {
             ))}
           </div>
 
-          <h2 className="mt-10 h-display text-2xl font-bold text-ink">Other {r.kind.toLowerCase()}s in {co.nameWithThe}</h2>
+          <h2 className="mt-10 h-display text-2xl font-bold text-ink">Explore other UK areas</h2>
           <div className="mt-4 flex flex-wrap gap-2">
             {siblings.map((x) => (
               <Link key={x.slug} href={`/${co.slug}/${x.slug}`} className="rounded-full border border-[#ddd5c4] bg-white px-3.5 py-1.5 text-sm text-ink/65 hover:border-gold hover:text-ink">

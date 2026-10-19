@@ -9,22 +9,22 @@ export const metadata: Metadata = {
   title: 'How It Works — From Form to Funds in 5 Steps',
   description: 'Exactly what happens after you request a cash offer: vetting, the offer, proof of funds, legal work and completion — step by step, with honest timelines.',
   alternates: { canonical: '/how-it-works' },
+  openGraph: { title: 'How It Works — From Form to Funds in 5 Steps', description: 'Exactly what happens after you request a cash offer: vetting, the offer, proof of funds, legal work and completion — step by step, with honest timelines.', url: '/how-it-works' },
 };
 
 const steps: [string, string][] = [
   ['Tell us about the property', 'The two-minute form: address, condition, situation, timeline. This is everything a buyer needs to prepare a serious offer. It costs nothing and commits you to nothing.'],
-  ['We match you with a vetted local buyer', 'Not a call centre — an established cash buyer who actually purchases in your area and understands your street, your property type and your situation.'],
-  ['You receive a no-obligation cash offer', 'Usually within 24–48 hours. The offer reflects the property as it stands — no conditions about repairs, cleaning or presentation. Ask every question you like.'],
+  ['We review the UK property enquiry', 'We check your location and circumstances, identify any suitable independent buyer and explain the proposed introduction, including any buyer-paid fee. We confirm permission before sharing your details.'],
+  ['You receive a no-obligation cash offer', 'A buyer may assess the property, ask for documents or arrange an inspection. An offer is not guaranteed. Ask for the price, conditions, costs and proposed date in writing.'],
   ['Verify, then decide in your own time', 'Ask for proof of funds (any genuine buyer provides it happily). Have your own legal representative review the paperwork. Compare against the open-market route. The decision stays entirely yours.'],
-  ['Complete on your date, funds in your account', 'Once you accept, the buyer moves at your pace — from about a week in the US and UK to a few weeks elsewhere. No chain, no financing fall-throughs, no surprises at the finish line.'],
+  ['Complete on your date, funds in your account', 'Your solicitor checks the title, authority to sell, mortgage redemption and contract. The process differs between UK nations. A date is agreed when the legal work allows; cash sales can still be delayed or fall through.'],
 ];
 
 const howToSchema = {
   '@context': 'https://schema.org',
   '@type': 'HowTo',
   name: 'How to sell your house fast for cash',
-  description: 'The five-step process for selling a property quickly to a vetted cash buyer.',
-  totalTime: 'P14D',
+  description: 'The five-step process for selling a property quickly to an independent cash buyer.',
   step: steps.map(([name, text], i) => ({ '@type': 'HowToStep', position: i + 1, name, text })),
 };
 
@@ -48,7 +48,7 @@ export default function HowItWorksPage() {
           <h2 className="h-display text-2xl font-bold text-ink">Ready for step one?</h2>
           <div className="mt-4 flex flex-wrap justify-center gap-3">
             {countries.map((c) => (
-              <Link key={c.slug} href={`/${c.slug}`} className="btn-ink !px-6 !py-3 text-sm">{c.flag} {c.name}</Link>
+              <Link key={c.slug} href="/#offer" className="btn-ink !px-6 !py-3 text-sm">{c.flag} {c.name}</Link>
             ))}
           </div>
         </div>

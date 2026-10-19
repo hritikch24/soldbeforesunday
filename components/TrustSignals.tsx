@@ -2,10 +2,10 @@ import Link from 'next/link';
 import { CONTACT_EMAIL, PHONE, PHONE_DISPLAY } from '@/lib/config';
 
 const promises: [string, string][] = [
-  ['You never pay us anything', 'No fees, no commissions, no "valuation" or "processing" charges — not at any stage. If anyone in this process asks you for money, walk away and tell us.'],
-  ['No obligation, ever', 'An offer is information, not a contract. Take it to a lawyer, compare it against listing, or ignore it entirely. Nobody will chase you.'],
+  ['You never pay us anything', 'No fees, no commissions, no "valuation" or "processing" charges — not at any stage. Independent legal fees, mortgage charges and other sale costs may still apply. Ask for a full written breakdown.'],
+  ['No obligation, ever', 'An enquiry creates no obligation to sell. Have your own solicitor explain any contract before signing and compare the offer with an open-market valuation.'],
   ['We tell you when listing is better', 'If your property would net you more on the open market and you have time to wait, we will say so. A bad-fit lead helps nobody.'],
-  ['Verify before you sign anything', 'Ask any buyer for proof of funds and have your own solicitor or attorney review the contract. We tell you to check us as hard as you check anyone.'],
+  ['Verify before you sign anything', 'Ask any buyer for proof of funds and have your own solicitor review the contract. We tell you to check us as hard as you check anyone.'],
 ];
 
 export default function TrustSignals() {

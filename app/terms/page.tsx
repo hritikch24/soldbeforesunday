@@ -1,24 +1,25 @@
 import type { Metadata } from 'next';
-import { SITE_NAME } from '@/lib/config';
+import { SITE_NAME, CONTACT_EMAIL } from '@/lib/config';
 
 export const metadata: Metadata = {
-  title: 'Terms of Use',
-  description: 'The terms governing use of this website and our connection service.',
+  title: 'Terms of Use — UK Property Introductions',
+  description: 'Terms for our UK property introduction service, including fees, independent buyers and sale costs.',
   alternates: { canonical: '/terms' },
+  openGraph: { title: 'Terms of Use — UK Property Introductions', description: 'Terms for our UK property introduction service, including fees, independent buyers and sale costs.', url: '/terms' },
 };
 
 export default function TermsPage() {
-  return (
-    <section className="mx-auto max-w-3xl px-4 py-12">
-      <h1 className="text-4xl font-extrabold">Terms of Use</h1>
-      <div className="mt-6 space-y-4 leading-relaxed opacity-80">
-        <p><strong>What this service is.</strong> {SITE_NAME} is a connection service: we match enquiries with vetted independent providers or buyers who operate in the relevant area. We are not a party to any transaction, contract or work agreed between you and them.</p>
-        <p><strong>No fees to you.</strong> Submitting a request is free and creates no obligation on you to accept any offer or engage any provider.</p>
-        <p><strong>Independent providers.</strong> Providers and buyers in our network are independent businesses. We vet for legitimacy, but you remain responsible for your own checks — including verifying proof of funds, licences and insurance where applicable, and taking independent legal or financial advice before signing anything.</p>
-        <p><strong>No professional advice.</strong> Content on this site is general information, not legal, financial or real-estate advice. Laws and processes differ by country and state/province; confirm anything material with a qualified local professional.</p>
-        <p><strong>Liability.</strong> To the maximum extent permitted by law, we are not liable for the acts, omissions, offers or workmanship of independent providers, or for decisions you make based on site content. Nothing in these terms limits rights that cannot be limited under your local consumer law (including the Australian Consumer Law and UK consumer protection legislation).</p>
-        <p><strong>Changes.</strong> We may update these terms and the service at any time; continued use constitutes acceptance of the current version.</p>
-      </div>
-    </section>
-  );
+  return <section className="mx-auto max-w-3xl px-4 py-12">
+    <h1 className="h-display text-4xl font-bold">Terms of Use</h1>
+    <p className="mt-3 text-sm text-ink/55">Updated 20 October 2026</p>
+    <div className="mt-6 space-y-4 leading-relaxed text-ink/75">
+      <p><strong>Our service.</strong> {SITE_NAME} accepts enquiries about properties in England, Scotland, Wales and Northern Ireland and explores introductions to independent buyers. We do not purchase your property. An enquiry does not guarantee a buyer, offer, price or completion date.</p>
+      <p><strong>Eligibility.</strong> You must be at least 18 and the owner or authorised to enquire about the property. Give accurate information and do not send identity documents or bank details through the enquiry form.</p>
+      <p><strong>Fees.</strong> Homeowners pay us no enquiry or introduction fee. We may receive an introduction fee from a buyer and explain any applicable arrangement before an introduction. Obtain written details of all separate legal, mortgage and transaction costs.</p>
+      <p><strong>Independent buyers.</strong> Any purchase agreement is between you and the identified buyer. Check proof of funds and have your own solicitor review the contract, conditions and costs before signing. An enquiry does not commit you to sell; a later contract may create binding obligations.</p>
+      <p><strong>General information.</strong> Website content is not individual legal, debt, financial or tax advice. Rules differ between UK nations. Obtain advice appropriate to your property and circumstances, especially for arrears, estates or tenancies.</p>
+      <p><strong>Your rights.</strong> Nothing in these terms excludes our responsibility where it cannot lawfully be excluded or limits your statutory consumer rights. You retain any mandatory protections available where you live.</p>
+      <p><strong>Questions or complaints.</strong> Email <a className="text-moss underline" href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a> with the relevant enquiry details so we can investigate. Ask any proposed buyer for their own complaints procedure and applicable redress details before proceeding.</p>
+    </div>
+  </section>;
 }

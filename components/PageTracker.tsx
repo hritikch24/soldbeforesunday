@@ -3,13 +3,15 @@
 import { useEffect } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
+import { hasTrackingConsent, useTrackingConsent } from '@/lib/tracking-consent';
 
 function getSessionId(): string {
   const key = '_sid';
-  let sid = sessionStorage.getItem(key);
+  let sid: string | null = null;
+  try { sid = sessionStorage.getItem(key); } catch { /* storage unavailable */ }
   if (!sid) {
     sid = Math.random().toString(36).slice(2) + Date.now().toString(36);
-    sessionStorage.setItem(key, sid);
+    try { sessionStorage.setItem(key, sid); } catch { /* storage unavailable */ }
   }
   return sid;
 }
@@ -31,6 +33,7 @@ export function getBrowser(): string {
 }
 
 export function trackEvent(event: string, extra: Record<string, string | null> = {}) {
+  if (!hasTrackingConsent()) return;
   const sp = new URLSearchParams(window.location.search);
   const payload = {
     event,
@@ -56,12 +59,13 @@ export function trackEvent(event: string, extra: Record<string, string | null> =
 
 function Tracker() {
   const pathname = usePathname();
+  const consent = useTrackingConsent();
   const search = useSearchParams();
   useEffect(() => {
     if (pathname.startsWith('/metrics') || pathname.startsWith('/admin') || pathname.startsWith('/api')) return;
     trackEvent('pageview');
     // search included so SPA navigations with new UTMs re-fire
-  }, [pathname, search]);
+  }, [pathname, search, consent]);
   return null;
 }
 

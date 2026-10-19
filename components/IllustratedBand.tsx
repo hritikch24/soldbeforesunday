@@ -6,8 +6,8 @@ export default function IllustratedBand({ country, cityName }: { country: string
           A calmer way to sell{cityName ? ` in ${cityName}` : ''}.
         </h2>
         <p className="mx-auto mt-3 max-w-2xl text-ink/70">
-          No boards on the lawn for months, no stream of strangers through your hallway — just a fair
-          offer and a date that works for you.
+          Explore a direct sale without an open-market listing. An independent buyer may still need an inspection,
+          and your solicitor will confirm the legal steps and any agreed date.
         </p>
       </div>
       {/* Original per-country flat illustration — decorative, not a photo of a specific property */}

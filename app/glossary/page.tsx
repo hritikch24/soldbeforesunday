@@ -6,8 +6,9 @@ import { SITE_URL } from '@/lib/config';
 
 export const metadata: Metadata = {
   title: 'Property Sale Glossary — Plain-English Definitions',
-  description: 'Foreclosure, repossession, power of sale, settlement, probate, chain-free, proof of funds — every fast-sale term defined in plain English for the US, UK, Canada and Australia.',
+  description: 'UK property sale terms explained: completion, exchange, missives, Home Reports, probate, confirmation, leasehold and proof of funds.',
   alternates: { canonical: '/glossary' },
+  openGraph: { title: 'Property Sale Glossary — Plain-English Definitions', description: 'UK property sale terms explained: completion, exchange, missives, Home Reports, probate, confirmation, leasehold and proof of funds.', url: '/glossary' },
 };
 
 const schema = {
@@ -25,7 +26,7 @@ export default function GlossaryPage() {
       <Breadcrumbs crumbs={[{ href: '/', label: 'Home' }, { href: '/glossary', label: 'Glossary' }]} />
       <section className="mx-auto max-w-3xl px-4 pb-16">
         <h1 className="h-display text-4xl font-bold text-ink">The jargon, <span className="accent-italic">translated.</span></h1>
-        <p className="mt-3 text-lg text-ink/70">Every term you&rsquo;ll meet in a fast property sale, in plain English — with country-specific terms flagged.</p>
+        <p className="mt-3 text-lg text-ink/70">Every term you&rsquo;ll meet in a fast property sale, in plain English — with differences between the UK nations explained.</p>
         <dl className="mt-8 space-y-5">
           {glossary.map((t) => (
             <div key={t.term} className="card-soft p-5">

@@ -3,6 +3,7 @@
 import { useEffect, useState, useCallback } from 'react';
 import { usePathname } from 'next/navigation';
 import { trackEvent } from './PageTracker';
+import LeadConsent from './LeadConsent';
 
 const SUPPRESS_KEY = 'sbs_popup_seen';
 
@@ -10,8 +11,10 @@ export default function LeadPopup() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [busy, setBusy] = useState(false);
+  const [contactConsent, setContactConsent] = useState(false);
+  const [error, setError] = useState('');
   const [done, setDone] = useState(false);
-  const [d, setD] = useState({ name: '', phone: '', address: '' });
+  const [d, setD] = useState({ name: '', phone: '', address: '', postcode: '' });
 
   const suppressed = useCallback(() => {
     if (/^\/(admin|metrics|contact|thanks|api)/.test(pathname)) return true;
@@ -48,17 +51,22 @@ export default function LeadPopup() {
   }, [trigger, suppressed]);
 
   async function submit() {
+    setError('');
     setBusy(true);
     try {
-      await fetch('/api/lead', {
+      const response = await fetch('/api/lead', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...d, source: 'exit_popup', page: window.location.pathname, ts: new Date().toISOString() }),
+        body: JSON.stringify({ ...d, country: 'uk', contactConsent, source: 'exit_popup', page: window.location.pathname, ts: new Date().toISOString() }),
       });
+      const result = await response.json();
+      if (!response.ok) throw new Error(result.error || 'We could not save your enquiry. Please try again or call us.');
       trackEvent('popup_submit', { action: 'popup_submit' });
       const w = window as unknown as { gtag?: (...a: unknown[]) => void };
       if (typeof w.gtag === 'function') w.gtag('event', 'lead_submit', { source: 'exit_popup' });
       setDone(true);
+    } catch (failure) {
+      setError(failure instanceof Error ? failure.message : 'Connection failed. Please try again or call us.');
     } finally {
       setBusy(false);
     }
@@ -72,6 +80,7 @@ export default function LeadPopup() {
       onClick={() => setOpen(false)}
       role="dialog"
       aria-modal="true"
+      aria-label="Request a UK property callback"
     >
       <div
         className="relative w-full max-w-md overflow-hidden rounded-3xl bg-cream shadow-2xl"
@@ -89,23 +98,26 @@ export default function LeadPopup() {
           <div className="px-8 py-12 text-center">
             <p className="text-4xl">✓</p>
             <h3 className="h-display mt-3 text-2xl font-bold text-ink">We&rsquo;ll be in touch shortly.</h3>
-            <p className="mt-2 text-ink/70">A vetted local buyer will call you within 24 hours with your no-obligation offer.</p>
+            <p className="mt-2 text-ink/70">We will review your UK enquiry and contact you about the next steps. We confirm permission before sharing your details with a buyer.</p>
           </div>
         ) : (
           <>
             <div className="bg-ink px-8 py-6 text-center">
               <p className="text-xs font-bold uppercase tracking-[0.25em] text-gold">Before you go</p>
               <h3 className="h-display mt-1 text-2xl font-bold text-white">Wondering what your house is worth in cash?</h3>
-              <p className="mt-2 text-sm text-[#cfe0d6]">Leave your details — a real person calls you back with a free, no-obligation figure. No spam, no pressure.</p>
+              <p className="mt-2 text-sm text-[#cfe0d6]">Leave your UK property details to request a callback about a possible buyer introduction. Free, with no obligation.</p>
             </div>
             <div className="space-y-3 px-8 py-6">
               <input aria-label="Your name" autoComplete="name" placeholder="Your name" className="w-full rounded-xl border border-[#ddd5c4] bg-white p-3.5" value={d.name} onChange={(e) => setD({ ...d, name: e.target.value })} />
               <input aria-label="Phone" type="tel" autoComplete="tel" inputMode="tel" placeholder="Phone number" className="w-full rounded-xl border border-[#ddd5c4] bg-white p-3.5" value={d.phone} onChange={(e) => setD({ ...d, phone: e.target.value })} />
-              <input aria-label="Property location" placeholder="Property address or ZIP" className="w-full rounded-xl border border-[#ddd5c4] bg-white p-3.5" value={d.address} onChange={(e) => setD({ ...d, address: e.target.value })} />
-              <button disabled={busy || !d.name || !d.phone} onClick={submit} className="btn-ink w-full disabled:opacity-50">
+              <input aria-label="Property location" placeholder="UK property address" className="w-full rounded-xl border border-[#ddd5c4] bg-white p-3.5" value={d.address} onChange={(e) => setD({ ...d, address: e.target.value })} />
+              <input aria-label="UK property postcode" autoComplete="postal-code" placeholder="UK postcode" className="w-full rounded-xl border border-[#ddd5c4] bg-white p-3.5" value={d.postcode} onChange={(e) => setD({ ...d, postcode: e.target.value })} />
+              <LeadConsent checked={contactConsent} onChange={setContactConsent} />
+              {error && <p role="alert" className="text-sm text-red-700">{error}</p>}
+              <button disabled={busy || !d.name.trim() || !d.phone.trim() || !d.address.trim() || !d.postcode.trim() || !contactConsent} onClick={submit} className="btn-ink w-full disabled:opacity-50">
                 {busy ? 'Sending…' : 'Get My Free Cash Offer →'}
               </button>
-              <p className="text-center text-[11px] text-ink/45">By submitting, you agree a vetted local buyer may contact you by phone, SMS or email. Free · No obligation.</p>
+              <p className="text-center text-[11px] text-ink/45">UK properties only · Free enquiry · No obligation.</p>
             </div>
           </>
         )}

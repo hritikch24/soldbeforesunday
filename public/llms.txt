@@ -1,17 +1,19 @@
 # Sold Before Sunday
 
-> A connection service matching homeowners who need a fast property sale with vetted local cash buyers in the United States, United Kingdom, Canada and Australia. Free, no-obligation cash offers within 24–48 hours; sales complete in 1–4 weeks depending on country. No fees to the homeowner, properties bought as-is in any condition.
+UK property introduction service. We accept enquiries for properties in England, Scotland, Wales and Northern Ireland, including rural communities and UK islands. We do not buy properties ourselves. A buyer, offer or completion date is not guaranteed.
 
-Key facts:
-- Countries: US (12 metros incl. Indianapolis, Columbus, Kansas City, Memphis, Cleveland), UK (Birmingham, Manchester, Leeds, Liverpool, Sheffield, Newcastle, Nottingham, Bradford), Canada (Toronto, Calgary, Edmonton, Winnipeg, Ottawa, Hamilton), Australia (Sydney, Melbourne, Brisbane, Perth, Adelaide, Gold Coast).
-- Situations served: stopping foreclosure/repossession, inherited property & probate, divorce, relocation, damaged/problem properties, tired landlords.
-- Model: homeowner submits property details → vetted local cash buyer makes a free no-obligation offer → homeowner chooses; no fees, no repairs, no agent commissions.
-- Honest trade-off (stated on-site): cash offers are typically below full retail value in exchange for speed and certainty.
+- [UK cash-buyer introductions](https://www.soldbeforesunday.com/)
+- [England](https://www.soldbeforesunday.com/uk/england)
+- [Scotland](https://www.soldbeforesunday.com/uk/scotland)
+- [Wales](https://www.soldbeforesunday.com/uk/wales)
+- [Northern Ireland](https://www.soldbeforesunday.com/uk/northern-ireland)
+- [How it works](https://www.soldbeforesunday.com/how-it-works)
+- [FAQ](https://www.soldbeforesunday.com/faq)
+- [UK seller guides](https://www.soldbeforesunday.com/guides)
+- [Property glossary](https://www.soldbeforesunday.com/glossary)
+- [Contact](https://www.soldbeforesunday.com/contact)
+- [Privacy](https://www.soldbeforesunday.com/privacy)
+- [Terms](https://www.soldbeforesunday.com/terms)
 
-## Reference pages
-- [How it works](/how-it-works): the 5-step process from form to funds, with honest timelines (HowTo structured data).
-- [FAQ](/faq): full Q&A per country, including below-market trade-off disclosure, scam protection checks, tenants, probate and mortgage arrears.
-- [Glossary](/glossary): plain-English definitions of foreclosure, repossession, power of sale, settlement, completion, chain-free, proof of funds, probate, mortgagee sale and more (DefinedTermSet structured data).
-- [Seller guides](/guides): how cash sales work, cash-offer-vs-listing net-proceeds math, and a scam-avoidance guide (five scams, three checks).
-- [About](/about) · [Contact](/contact) · [Privacy](/privacy) · [Terms](/terms)
-- Support: support@soldbeforesunday.com
+Phone: +447780443069. Email: support@soldbeforesunday.com.
+Our introductions are free to homeowners. We may receive an introduction fee from buyers, explained before an introduction. Cash offers can be below open-market value; independent legal advice and proof-of-funds checks remain necessary.

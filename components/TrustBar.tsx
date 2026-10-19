@@ -1,9 +1,9 @@
 export default function TrustBar() {
   const items = [
-    ['24–48h', 'to a real cash offer'],
-    ['$0', 'fees, ever, to you'],
+    ['UK', 'nationwide enquiries'],
+    ['£0', 'for our introduction service'],
     ['Any', 'condition or situation'],
-    ['4', 'countries, vetted buyers'],
+    ['4', 'UK nations covered'],
   ];
   return (
     <div className="border-y border-[#e9e3d6] bg-paper">

@@ -22,7 +22,7 @@ import { SITE_URL } from '@/lib/config';
 // to its state/province so neither layer is an orphan in the crawl graph.
 function parentRegion(co: Country, ci: City) {
   return regionsFor(co.slug).find(
-    (r) => r.metros.some((m) => m.toLowerCase().startsWith(ci.name.toLowerCase())) || r.name === ci.region
+    (r) => r.slug === ci.regionSlug
   );
 }
 
@@ -43,7 +43,6 @@ export default function CityBody({ co, ci }: { co: Country; ci: City }) {
       <Breadcrumbs
         crumbs={[
           { href: '/', label: 'Home' },
-          { href: `/${co.slug}`, label: co.name },
           ...(parent ? [{ href: `/${co.slug}/${parent.slug}`, label: parent.name }] : []),
           { href: `/${co.slug}/${ci.slug}`, label: ci.name },
         ]}
@@ -55,9 +54,9 @@ export default function CityBody({ co, ci }: { co: Country; ci: City }) {
             <h1 className="h-display fluid-hero font-bold text-ink">Sell Your House Fast in {cityLabel(ci)}</h1>
             <p className="mt-4 text-lg leading-relaxed text-ink/70">{ci.blurb}</p>
             <ul className="mt-6 space-y-2 font-medium text-ink/80">
-              <li>✓ Cash offer within 24–48 hours — free, no obligation</li>
+              <li>✓ Free cash-buyer enquiry, with no obligation to accept</li>
               <li>✓ Any condition, any part of {ci.name}</li>
-              <li>✓ No {co.agentTerm} fees · {co.processTerm} in {co.days}</li>
+              <li>✓ No fee for our introduction; legal costs may apply</li>
             </ul>
           </div>
           <LeadForm country={co.slug} city={ci.slug} />

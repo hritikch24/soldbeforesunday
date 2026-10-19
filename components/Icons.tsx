@@ -29,7 +29,7 @@ export const IconWrench = (p: { className?: string }) => (
 );
 
 export const situationIcon: Record<string, (p: { className?: string }) => React.ReactElement> = {
-  'stopping-foreclosure': IconShield,
+  'repossession': IconShield,
   'inherited-property': IconGavel,
   'divorce': IconHeart,
   'relocation': IconTruck,

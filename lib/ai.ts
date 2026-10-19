@@ -5,6 +5,10 @@ import { AI_MODEL, SITE_NAME } from './config';
 export async function scoreLead(data: Record<string, unknown>): Promise<string | null> {
   const key = process.env.GROQ_API_KEY;
   if (!key) return null;
+  // Keep names, contact details, addresses and free-text messages out of scoring.
+  const summary = Object.fromEntries(
+    ['country', 'city', 'propertyType', 'condition', 'reason', 'timeline'].map((field) => [field, data[field]])
+  );
   try {
     const r = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
@@ -17,7 +21,7 @@ export async function scoreLead(data: Record<string, unknown>): Promise<string |
             role: 'system',
             content: `You score incoming leads for ${SITE_NAME}, a lead-generation site. Reply in ONE line: "N/10 — <15-word summary of urgency and value>". 10 = urgent, motivated, complete contact info. 1 = junk/spam.`,
           },
-          { role: 'user', content: JSON.stringify(data).slice(0, 2000) },
+          { role: 'user', content: JSON.stringify(summary).slice(0, 2000) },
         ],
       }),
     });

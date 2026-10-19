@@ -4,15 +4,15 @@ import Breadcrumbs from '@/components/Breadcrumbs';
 
 export const metadata: Metadata = {
   title: 'Seller Guides — Straight Answers on Fast House Sales',
-  description: 'Plain-English guides for homeowners considering a fast cash sale: how it works, the real math vs listing, and how to spot quick-sale scams.',
+  description: 'Plain-English guides for homeowners considering a fast cash sale: how it works, the net proceeds compared with listing, and how to spot quick-sale scams.',
   alternates: { canonical: '/guides' },
   openGraph: { title: 'Seller Guides', description: 'Straight answers on fast house sales.', url: '/guides' },
 };
 
 const posts = [
-  { slug: 'how-fast-cash-house-sales-work', title: 'How Fast Cash House Sales Actually Work (2026 Guide)', excerpt: 'Who cash buyers are, where their money comes from, why they can move in days, and what happens at each step — with honest timelines for the US, UK, Canada and Australia.' },
-  { slug: 'cash-offer-vs-listing-real-math', title: 'Cash Offer vs Listing: The Real Math', excerpt: 'Cash offers are below retail — everyone says it, few show the arithmetic. Here is the full net-proceeds comparison including fees, repairs, holding costs and fall-through risk.' },
-  { slug: 'avoid-quick-sale-scams', title: 'How to Spot and Avoid Quick-Sale Scams', excerpt: 'The five scams that target motivated sellers, the three checks that defeat all of them, and the questions a genuine cash buyer answers without flinching.' },
+  { slug: 'how-fast-cash-house-sales-work', title: 'How Fast Cash House Sales Actually Work (2026 Guide)', excerpt: 'How UK cash-buyer introductions work, what legal checks remain and how the process differs across the four nations.' },
+  { slug: 'cash-offer-vs-listing-real-math', title: 'Cash Offer vs Estate Agent: UK Sale Costs', excerpt: 'Cash offers are below retail — everyone says it, few show the arithmetic. Here is the full net-proceeds comparison including fees, repairs, holding costs and fall-through risk.' },
+  { slug: 'avoid-quick-sale-scams', title: 'How to Spot and Avoid Quick-Sale Scams', excerpt: 'Check buyer identity, proof of funds, price conditions and legal costs before committing to a quick property sale.' },
 ];
 
 export default function GuidesPage() {

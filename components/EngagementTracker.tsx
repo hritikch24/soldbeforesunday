@@ -3,12 +3,14 @@
 import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { trackEvent } from './PageTracker';
+import { useTrackingConsent } from '@/lib/tracking-consent';
 
 export default function EngagementTracker() {
   const pathname = usePathname();
+  const consent = useTrackingConsent();
 
   useEffect(() => {
-    if (/^\/(admin|metrics|api)/.test(pathname)) return;
+    if (!consent || /^\/(admin|metrics|api)/.test(pathname)) return;
 
     const fired = new Set<string>();
     const fire = (action: string) => {
@@ -58,7 +60,7 @@ export default function EngagementTracker() {
       sectionIO.disconnect();
       timers.forEach(clearTimeout);
     };
-  }, [pathname]);
+  }, [pathname, consent]);
 
   return null;
 }

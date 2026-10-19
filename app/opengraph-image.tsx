@@ -22,7 +22,7 @@ export default function OGImage() {
         <div style={{ fontSize: 34, color: '#c79a3b', letterSpacing: 6, textTransform: 'uppercase' }}>Sold Before Sunday</div>
         <div style={{ fontSize: 84, fontWeight: 700, marginTop: 24, lineHeight: 1.05 }}>Sell the house.</div>
         <div style={{ fontSize: 84, fontWeight: 700, color: '#c79a3b', lineHeight: 1.05 }}>Skip the circus.</div>
-        <div style={{ fontSize: 30, marginTop: 36, color: '#cfe0d6' }}>Cash offer in 24–48h · No fees · No repairs · US · UK · CA · AU</div>
+        <div style={{ fontSize: 30, marginTop: 36, color: '#cfe0d6' }}>UK cash-buyer introductions · Free enquiry · No obligation</div>
       </div>
     ),
     size

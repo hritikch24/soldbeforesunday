@@ -4,12 +4,12 @@
 // regions — never invented names, addresses or dollar amounts (which would be
 // fabricated claims). Purely ambient motion + real value props.
 const items = [
-  '✓ Free cash offers in 24–48 hours',
-  '✓ No fees, no repairs, no agents',
+  '✓ Free UK property enquiries',
+  '✓ No fee for our introduction service',
   '✓ Sell in any condition',
-  '✓ You choose the closing date',
-  '✓ Foreclosure, inherited, divorce, relocation — all handled',
-  '✓ Vetted local buyers only',
+  '✓ Agree a completion date with your solicitor',
+  '✓ Inherited property, divorce and relocation enquiries',
+  '✓ England, Scotland, Wales and Northern Ireland',
   '✓ Verify proof of funds before you sign',
   '✓ Honest advice — we tell you if listing is better',
 ];

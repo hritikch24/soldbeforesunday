@@ -1,10 +1,10 @@
 import { factsFor } from '@/data/network';
 
 const checks: [string, string][] = [
-  ['Proof of funds on file', 'Bank-verified evidence they can actually complete — before they ever see your details.'],
-  ['Purchase history checked', 'They must evidence completed buys in your market, not just intentions.'],
-  ['Registered, identifiable businesses', 'Real entities, real directors, real addresses. No anonymous cash guys.'],
-  ['Removed for bad conduct', 'Pressure tactics, late price drops or fee demands to sellers ends the relationship.'],
+  ['Proof of funds', 'Ask your solicitor to verify evidence of available purchase funds before relying on an offer.'],
+  ['Purchase history', 'Request evidence of completed purchases and experience with your property type.'],
+  ['Registered, identifiable businesses', 'Confirm the legal buyer identity, business details and any claimed memberships.'],
+  ['Written terms and conduct', 'Check the conditions, costs and any price-change provisions with your independent solicitor.'],
 ];
 
 export default function BuyerNetwork({ country, cityName }: { country: string; cityName?: string }) {
@@ -17,7 +17,7 @@ export default function BuyerNetwork({ country, cityName }: { country: string; c
         </h2>
         <p className="mx-auto mt-3 max-w-2xl text-center text-ink/70">
           We don&rsquo;t buy your property — we match it with an independent cash buyer active
-          {cityName ? ` in ${cityName}` : ' in your area'}. Here&rsquo;s the bar they clear first.
+          {cityName ? ` in ${cityName}` : ' in your area'}. These are the checks to confirm before you proceed.
         </p>
         {f && f.activeBuyers > 0 && (
           <p className="mt-5 text-center text-sm font-semibold text-moss">
@@ -34,7 +34,7 @@ export default function BuyerNetwork({ country, cityName }: { country: string; c
         </div>
         <p className="mt-7 text-center text-sm text-ink/50">
           Run these same checks yourself on anyone who makes you an offer — including buyers we introduce.
-          A genuine one will hand over proof of funds the same day.
+          Do not proceed under pressure or rely on an unsupported promise.
         </p>
       </div>
     </section>

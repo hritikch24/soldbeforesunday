@@ -7,6 +7,8 @@ import LeadForm from '@/components/LeadForm';
 import FAQSection from '@/components/FAQSection';
 import Breadcrumbs from '@/components/Breadcrumbs';
 
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return countries.flatMap((c) => situations.map((s) => ({ country: c.slug, slug: s.slug })));
 }
@@ -18,7 +20,7 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
   if (!c || !s) return {};
   return {
     title: s.title(c),
-    description: `${s.heading(c)} Free, no-obligation cash offers from vetted buyers — ${c.processTerm} in ${c.days}.`,
+    description: `${s.heading(c)} Request a free UK cash-buyer introduction. Buyer availability, legal checks and your circumstances determine any offer and timing.`,
     openGraph: { title: s.title(c), description: s.heading(c), url: `/${country}/situations/${slug}` },
     alternates: { canonical: `/${country}/situations/${slug}` },
   };
@@ -32,7 +34,7 @@ export default async function SituationPage({ params }: { params: Promise<{ coun
 
   return (
     <>
-      <Breadcrumbs crumbs={[{ href: '/', label: 'Home' }, { href: `/${c.slug}`, label: c.name }, { href: `/${c.slug}/situations/${s.slug}`, label: s.title(c) }]} />
+      <Breadcrumbs crumbs={[{ href: '/', label: 'Home' }, { href: `/${c.slug}/situations/${s.slug}`, label: s.title(c) }]} />
       <section className="mx-auto grid max-w-6xl gap-10 px-4 pb-14 lg:grid-cols-2">
         <div>
           <h1 className="h-display text-3xl font-bold leading-[1.1] text-ink md:text-4xl">{s.heading(c)}</h1>

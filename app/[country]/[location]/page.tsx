@@ -6,9 +6,7 @@ import { regions, getRegion } from '@/data/regions';
 import CityBody from '@/components/CityBody';
 import RegionBody from '@/components/RegionBody';
 
-// One dynamic segment serves both layers, so existing /us/memphis URLs are
-// untouched while /us/ohio is added alongside them. Next.js allows only one
-// dynamic segment per level, which is why this dispatches rather than nesting.
+// One route serves UK cities and regions without duplicate location slugs.
 
 export const dynamicParams = false; // anything not pre-rendered 404s cleanly
 
@@ -41,26 +39,25 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
   const { country, location } = await params;
   const hit = resolve(country, location);
   if (!hit) return {};
-  const { co, city, region } = hit;
+  const { city, region } = hit;
   const url = `/${country}/${location}`;
 
   if (city) {
     return {
-      title: `Sell My House Fast ${cityLabel(city)} — Cash Offer in 24–48h`,
-      description: `Sell your house fast in ${city.name}, ${city.region}. Free cash offer from vetted local buyers — any condition, no fees, ${co.processTerm} in ${co.days}.`,
-      openGraph: { title: `Sell My House Fast ${cityLabel(city)} — Cash Offer in 24–48h`, description: city.blurb, url },
+      title: { absolute: `Sell House Fast in ${cityLabel(city)} | Sold Before Sunday` },
+      description: `Sell your house fast in ${city.name}, ${city.region}. Request a free cash-buyer introduction. Houses and flats considered; no obligation to accept an offer.`,
+      openGraph: { title: `Sell My House Fast ${cityLabel(city)} — UK Cash Buyer Introductions`, description: city.blurb, url },
       alternates: { canonical: url },
     };
   }
 
   const r = region!;
   return {
-    title: `Sell My House Fast in ${r.name} — Cash Offer in 24–48h`,
-    // Region-specific so no two of the 84 pages share a description.
-    description: `${r.intro} Free no-obligation cash offer from vetted ${r.name} buyers — any condition, no fees, ${co.processTerm} in ${co.days}.`.slice(0, 320),
+    title: { absolute: `Sell House Fast in ${r.name} | Sold Before Sunday` },
+    // Each UK location has a distinct search description.
+    description: `Sell your house fast in ${r.name}. Free cash-buyer introductions and local property guidance. No obligation; availability varies.`,
     openGraph: { title: `Sell My House Fast in ${r.name}`, description: r.intro, url },
-    // Deliberately no hreflang here: a US state has no UK/CA/AU counterpart, and
-    // non-reciprocal alternates are a Search Console error. Self-canonical only.
+    // These are distinct UK places, so each URL is self-canonical.
     alternates: { canonical: url },
   };
 }

@@ -11,7 +11,7 @@ export default function Breadcrumbs({ crumbs }: { crumbs: Crumb[] }) {
     itemListElement: crumbs.map((c, i) => ({ '@type': 'ListItem', position: i + 1, name: c.label, item: `${SITE_URL}${c.href}` })),
   };
   return (
-    <nav className="mx-auto max-w-6xl px-4 py-3 text-sm text-slate-500">
+    <nav aria-label="Breadcrumb" className="mx-auto max-w-6xl px-4 py-3 text-sm text-slate-500">
       <SchemaMarkup schema={schema} />
       {crumbs.map((c, i) => (
         <span key={c.href}>

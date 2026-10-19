@@ -12,9 +12,9 @@ export default function ClosingCTA() {
       <div className="relative mx-auto max-w-4xl px-4 py-20 text-center">
         <h2 className="h-display text-3xl font-bold text-white md:text-4xl">See what your house is worth in cash.</h2>
         <p className="mx-auto mt-3 max-w-xl text-[#cfe0d6]">
-          Free, no obligation, and no pressure. Two minutes to ask — a real figure within 24–48 hours.
+          Free to enquire, with no obligation to accept. Tell us about your UK property and explore whether a cash-buyer introduction suits you.
         </p>
-        <Link href="/#countries" className="mt-7 inline-block rounded-full bg-gold px-9 py-4 text-lg font-bold text-ink shadow-[var(--e3)] transition hover:-translate-y-0.5">
+        <Link href="/#offer" className="mt-7 inline-block rounded-full bg-gold px-9 py-4 text-lg font-bold text-ink shadow-[var(--e3)] transition hover:-translate-y-0.5">
           Get My Free Offer →
         </Link>
       </div>

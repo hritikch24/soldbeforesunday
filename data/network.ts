@@ -7,10 +7,7 @@ export interface NetworkFacts {
 }
 
 export const network: NetworkFacts[] = [
-  { country: 'us', activeBuyers: 0, metrosCovered: 12 },
   { country: 'uk', activeBuyers: 0, metrosCovered: 8 },
-  { country: 'ca', activeBuyers: 0, metrosCovered: 6 },
-  { country: 'au', activeBuyers: 0, metrosCovered: 6 },
 ];
 
 export function factsFor(country: string) {
