@@ -79,7 +79,7 @@ Review the Search Terms report **every 3 days for the first 3 weeks** and add ev
 **Why description 4 exists:** it repels bargain-curious clickers who'd cost you $25 and never sell. Pre-qualifying IN the ad is cheaper than after the click.
 
 ## 5. Assets (extensions)
-- **Call asset:** +1 (331) 431-8078 (calls tracked as call_click in /metrics)
+- **Call asset:** +1 (331) 431-8078, secondary number for calls and WhatsApp (calls tracked as call_click in /metrics). Primary WhatsApp: +1 (773) 870-8925.
 - **Sitelinks:** How It Works → /how-it-works · Avoid Scams → /guides/avoid-quick-sale-scams · FAQ → /faq · Stop Foreclosure → /us/situations/stopping-foreclosure
 - **Callouts:** No Fees Ever · 24–48h Offers · Sell 100% As-Is · You Choose Closing Date
 - **Structured snippet** (Types): Foreclosure, Inherited, Divorce, Damaged, Tenanted
